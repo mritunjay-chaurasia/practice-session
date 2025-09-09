@@ -1,0 +1,2 @@
+1- Node.js is single threaded then how to make it multithreaded
+2- if we delete package.lockjson file will delete from server then it is working or not

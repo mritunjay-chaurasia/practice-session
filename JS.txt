@@ -1,0 +1,21 @@
+1- Types of Data types
+    There are two types of Data Types
+    a- Primitive Data Types:- Primitive types are immutable (cannot be changed)
+        Number, Boolean, String, Undefined, Null, BigInt
+    b- Non Primitive Data Types:- These are objects and stored by reference.
+        Object, Array,Function
+
+2- Difference b/w setTimeout and setInterval
+    a- setTimeout: Runs once after a given delay.
+                setTimeout(()=>{
+                   console.log(Executes the callback only one time.)
+                },1000)
+    b- setInterval: Runs repeatedly after a given delay.  
+                setInterval(()=>{
+                    console.log(Executes the callback repeatedly)
+                },2000) 
+
+3- Make a function that behave same as setInterval
+
+
+ 
