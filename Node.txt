@@ -1,2 +1,165 @@
-1- Node.js is single threaded then how to make it multithreaded
-2- if we delete package.lockjson file will delete from server then it is working or not
+1- What is Node.js?
+    Node.js is a JavaScript runtime environment.
+    It allows you to run JavaScript on server side.
+    Built on Chrome’s V8 JavaScript engine.
+    Single-threaded event loop → handles many connections without blocking. 
+
+2- Node.js is single threaded then how to make it multithreaded
+    we can use worker_threads module to run JS in parallel threads.
+    Each worker has its own event loop, memory, and V8 instance.
+
+3- if we delete package.lockjson file will delete from server then it is working or not
+    If you delete it, the project might still run.
+    But you lose version control guarantees → may break later.
+
+4- Main Features of Node.js
+    a- Asynchronous & Non-blocking I/O  
+        Node.js uses an event-driven architecture.  
+        Operations like file reading, DB queries, and network requests don’t block the main thread.
+    b- Single threaded
+        Uses the event loop to handle many clients with one thread.
+        Can support thousands of concurrent connections efficiently.
+    c- Built on Google’s V8 Engine
+    d- Cross-platform
+    e- NPM 
+    f- Real-time Application Support
+        Perfect for apps like chat, gaming, live updates, notifications,
+        Uses WebSockets and event-driven design for instant communication.
+    f- Community Support & Open Source
+
+5- What are some disadvantages of Node.js? 
+    a- Single-threaded Limitations
+        While Node.js can scale horizontally (via cluster mode), a single process doesn’t take full advantage of multi-core CPUs by default.
+        Requires manual setup (clusters, worker threads).
+    b- Error Handling Challenges
+        Asynchronous error handling is trickier compared to synchronous languages.
+        Forgetting to handle errors in async code can crash the app.
+    c- Not Suitable for Heavy Computation
+        Event loop may become blocked by CPU-heavy operations.
+        Heavy CPU tasks (like image processing, video encoding, or complex math) can block the event loop and slow down the app.
+6- What are Modules?
+    A module is simply a reusable block of code that can be split into separate files and imported when needed.
+    Types of Modules in Node.js
+    a- Core Modules (built-in)
+       You don’t need to install them.(ex:fs, path, http, os)
+       path- Used to work with file and directory paths.
+       fs- fs module allows you to interact with the file system on your computer.
+            You can read, write, update, delete, and rename files using it.
+       http- module lets you create a web server and handle requests and responses.
+       events- Node.js has an event-driven architecture.
+                The events module allows you to create, fire, and listen for custom events.
+                It uses the EventEmitter class.
+       os-  The os module provides information about the operating system and hardware.
+    b- Local Modules
+        Modules you create yourself and use in your project.
+    c- Third-party Modules
+        installed via npm (ex. express, mongoose)
+7- What is the difference between synchronous and asynchronous code in Node.js?
+    a- Synchronous-
+        Executes line by line (blocking).
+        Each operation must finish before the next one starts.
+        If one task takes a long time, everything else is paused until it completes.
+    b- Asynchronous-
+        Non-blocking.
+        Operations are executed in the background.
+        While waiting, Node.js can continue running other code.
+        Results are handled using callbacks, promises, or async/await.
+
+8- What is the difference between CommonJS (require) and ES Modules (import)?
+        Feature	          CommonJS (CJS)	                 ES Modules (ESM)
+        Syntax	          require, module.exports	         import, export
+        Loading	          Synchronous	                     Asynchronous
+        Export style	  module.exports = ...	            export / export default
+
+9- What is package.json and package-lock.json?
+    a- package.json- 
+        Contains metadata about your project (name, version, description, author, etc.)
+        Lists dependencies and scripts used in your project.
+    b- package-lock.json- 
+        It’s an auto-generated file created when you install dependencies with npm install.
+        Ensures exact versions of dependencies are installed.
+        Contains a detailed tree of all installed packages (including nested dependencies).
+        Helps maintain consistency across environments (same versions in dev, staging, production).
+
+10- Explain the role of npm in Node.js.
+    It is the default package manager for Node.js.
+    It allows developers to install, share, and manage libraries (packages) in a Node.js project.
+
+11- What is the difference between npm install and npm ci?
+    Use npm install → during development (flexible, updates allowed).
+    Use npm ci → in CI/CD pipelines & production (faster, deterministic installs).
+
+12- What are Node.js global objects? Give examples.
+    Global Object	Description
+    __dirname	    Current directory path
+    __filename	    Current file path
+    console	        Logging utility
+    process	        Info/control about running process
+    Buffer	        Binary data handling
+    setTimeout / clearTimeout	Timer (delay)
+    setInterval / clearInterval	Timer (repeat)
+    setImmediate / clearImmediate	Run after I/O events
+    require	Import modules (CJS)
+    module	Info about current module
+
+13- How does the Node.js event loop work?
+    Node.js is single-threaded (only one main thread runs JavaScript).
+    But it is non-blocking thanks to the event loop.
+    The event loop allows Node.js to handle asynchronous operations (like file I/O, network requests, timers) without blocking the main thread.
+    Event Loop Workflow:
+    The event loop runs in phases. Each phase has a queue of callbacks to execute.
+    a. Timers Phase
+        Executes callbacks scheduled by:
+        setTimeout()
+        setInterval()
+    b. Pending Callbacks Phase
+        Executes I/O callbacks deferred from the previous loop.
+    c. Poll Phase
+        Important phase where:
+        Node waits for incoming I/O events (network, file system).
+        Executes their callbacks immediately if available.
+        If nothing is pending, it may block here.
+    d. Check Phase
+        Executes callbacks from setImmediate().
+    e. Close Callbacks Phase
+        Executes close event callbacks (like socket.on("close", ...)).
+
+14- What is non-blocking I/O in Node.js?
+        Non-blocking I/O in Node.js means operations don’t stop program execution while waiting for results — instead, they use callbacks, promises, or async/await so Node can continue doing other work.
+
+15- What is the difference between setTimeout, setInterval, and setImmediate?
+
+16- How does Node.js handle child processes?
+
+17- Explain streams in Node.js and their types.
+
+18-What is buffer in Node.js?
+
+19-Explain middleware in Node.js (with Express).
+
+20-What is CORS and how do you handle it in Node.js?
+
+21-How do you handle errors in asynchronous code?
+
+22-What is the difference between process.nextTick() and setImmediate()? 
+
+23-How does clustering work in Node.js?
+
+24-What are worker threads in Node.js?
+
+25-What are the differences between cluster, child_process, and worker_threads?
+
+26-How does Node.js manage memory?
+
+27-What is the difference between event-driven programming and multi-threaded programming?
+
+28-How can you prevent callback hell in Node.js?
+
+29-What is the difference between synchronous and asynchronous error handling?
+
+30-How do you secure a Node.js application?
+
+31-What is load balancing in Node.js and how is it achieved?
+
+
+

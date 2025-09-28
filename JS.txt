@@ -16,6 +16,44 @@
                 },2000) 
 
 3- Make a function that behave same as setInterval
+   we can use Recursive function
+    function runIntervalFun(callback, delay){
+        function loop(){
+            callback()
+            setTimeout(loop,delay)
+        }
+        setTimeout(loop,delay)
+    }
+
+    runIntervalFun(()=>{console.log("Now Time Start")},1000)
+
+4- What is Debouncing?    
+    Debouncing is a performance optimization technique in JavaScript that ensures a function is not called too frequently.
+    or prevents unnecessary APIs Call and reduce load time.
+    a- Imagine ringing a doorbell:
+    If you press it repeatedly, the bell should only ring once after you stop pressing for a short moment.
+    That’s debouncing.
+    b- Common use cases
+    Search input (wait until user stops typing to send API request)
+    Window resize event (don’t recalculate layout on every pixel change, wait until resize stops)
+    Button clicks (prevent double-submit)
+    const log = debounce((text) => {
+    console.log("Search:", text);
+    }, 500);
+    // Typing simulation
+    log("H");   // ignored
+    log("He");  // ignored
+    log("Hel"); // ignored
+    log("Hell"); // ignored
+    log("Hello"); // only this runs after 500ms pause
+
+5- Difference b/w filter() and find()
+    filter()
+    Return all elements that match a conditions
+    Always return an array(could be empty if no match conditions)
+    find()
+    Returns the first element that matches a condition.
+    Returns a single value (or undefined if no match).
 
 
  
