@@ -31,6 +31,17 @@
 // 1234
 // 12345
 
+// function printPattern(n){
+//     for(let i = 1; i <= n; i++){
+//         let row = ""
+//         for(let j = 1; j <= i ; j++){
+//             row += j
+//         }
+//         console.log(row)
+//     }
+// }
+// printPattern(5)
+
 
 //Q.5  
 // 12345
@@ -42,10 +53,10 @@
 // function printPattern(n) {
 //     for (let i = 1; i <= n; i++) {
 //         let row = ""
-//         for (let j = i; j <= n; j++) {
-//             row += j
-//         }
-//         console.log(row)
+//          for(let j = 1; j >= n-i;i++){
+//             console.log(j)
+//          }
+//         // console.log(row)
 //     }
 // }
 
@@ -58,12 +69,37 @@
 //  1234
 // 12345
 
+// function printPattern(n){
+// for(let i = 1; i <= n ; i++){
+//     let line = ""
+//     for(let j = 1; j <= n-i; j++){
+//         line += " "
+//     }
+//     for(let j = 1 ; j <= i ; j++){
+//         line += j
+//     }
+//     console.log(line)
+// }
+// }
+// printPattern(5)
+
 //Q.7 Inverted right-angled triangle with numbers:
 // 12345
 // 1234
 // 123
 // 12
 // 1
+
+// function printPattern(n){
+//     for(let i = 1 ; i <= n ; i++){
+//         let row = ""
+//         for(let j = 1; j <= n - i +1 ; j++){
+//             row += j
+//         }
+//         console.log(row)
+//     }
+// }
+// printPattern(5)
 
 //Q.8 Floyd’s Triangle:
 // 1
@@ -184,3 +220,7 @@
 // 0 1
 // 1 0 1
 // 0 1 0 1
+
+// Q.24
+//const str = "hello every one"
+//output = "Hello Every One"

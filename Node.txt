@@ -128,38 +128,177 @@
         Non-blocking I/O in Node.js means operations don’t stop program execution while waiting for results — instead, they use callbacks, promises, or async/await so Node can continue doing other work.
 
 15- What is the difference between setTimeout, setInterval, and setImmediate?
+    a- setTimeout:-  Executes a function after specified delay in miliseconds
+    b- setInterval:- Executes a function repeatedlly at specified delay in miliseconds
+    c- setImmediate:-Executes a function immediately after the curret event and before any timers like setTimeout(()=>{},0) 
+
 
 16- How does Node.js handle child processes?
+    Node.js uses the built-in child_process module to create and manage child processes. It provides methods like spawn, exec, execFile, and fork to run system commands or separate Node.js scripts. Child processes run outside the main event loop and communicate with the parent via events or IPC, which helps avoid blocking and enables parallel execution of heavy tasks.
 
 17- Explain streams in Node.js and their types.
+    Streams are objects in Node.js that let you read or write data continuously instead of loading it all at once.
 
-18-What is buffer in Node.js?
+    They are especially useful for large files, network requests, or real-time data.
+
+    Example: Reading a 5GB file — instead of loading the whole file into memory, Node.js reads it piece by piece (chunks) using streams.
+
+    There are 4 types: Readable (for reading), Writable (for writing), Duplex (both read & write like socket), and Transform (read/write with modification, like crypto). Streams are event-driven and help with performance and memory optimization.
+
+18- What is buffer in Node.js?
+    A Buffer in Node.js is a temporary storage area for raw binary data.
+
+    Buffers help Node.js handle binary data directly (since JavaScript normally works with strings and doesn’t handle raw bytes well)
 
 19-Explain middleware in Node.js (with Express).
+In Express.js, middleware is a function that has access to:
+    req (request object)
+    res (response object)
+    next (a function to pass control to the next middleware)
+Middleware functions sit between the request and response cycle of an Express app.
+Types of Middleware in Express:
+a- Application-level middleware
+    Defined using app.use() or app.METHOD()
+
+    app.use((req, res, next) => {
+    console.log("Time:", Date.now());
+    next();
+    });
+b- Router-level middleware
+    Works like app-level but applied only to specific routes.
+
+    const router = express.Router();
+    router.use((req, res, next) => {
+    console.log("Router middleware");
+    next();
+    });
+
+c- Built-in middleware (provided by Express)
+
+    express.json() → parses JSON requests
+    express.urlencoded() → parses URL-encoded data
+    express.static() → serves static files
+
+    app.use(express.json());
+    app.use(express.static("public"));
+
+d- Error-handling middleware
+    Must have 4 parameters: (err, req, res, next)
+
+    app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+    });
+
+e- Third-party middleware
+    Installed via npm.
+    Example: morgan (logging), cors (Cross-Origin Resource Sharing).
+
+    const morgan = require("morgan");
+    app.use(morgan("dev"));
 
 20-What is CORS and how do you handle it in Node.js?
+    CORS stands for Cross-Origin Resource Sharing, a browser security feature that restricts cross-domain requests. In Node.js (with Express), we typically handle it using the cors package or by manually setting Access-Control-Allow-* headers. This tells the browser which origins, methods, and headers are allowed, and handles preflight requests for methods like POST/PUT/DELETE.
+
+    const express = require("express");
+    const cors = require("cors");
+    const app = express();
+
+    // Allow all origins (not recommended for production)
+    app.use(cors());
+
+    // OR allow specific origins
+    app.use(cors({
+    origin: "http://localhost:3000", // frontend origin
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true
+    }));
+
+    app.get("/api", (req, res) => {
+    res.json({ message: "CORS enabled" });
+    });
+    app.listen(5000, () => console.log("Server running on 5000"));
+
 
 21-How do you handle errors in asynchronous code?
+with promises we can use .catch() method and in modern code async/await with try catch are used 
 
 22-What is the difference between process.nextTick() and setImmediate()? 
+    Both process.nextTick() and setImmediate() schedule callbacks, but they run at different points in the Node.js event loop. process.nextTick() runs immediately after the current operation, before the event loop continues, while setImmediate() runs on the next iteration, after I/O events. process.nextTick() has higher priority but can cause event loop starvation if overused, while setImmediate() is safer for deferring execution.
+
+    example:
+    setImmediate(() => console.log("setImmediate"));
+    process.nextTick(() => console.log("nextTick"));
+    console.log("Start");
+    output:
+    Start
+    nextTick
+    setImmediate
+
+
 
 23-How does clustering work in Node.js?
+    Node.js runs on a single thread (event loop).
+    By default, it uses only one CPU core — even if your system has 8 cores.
+    Clustering allows Node.js to create multiple processes (workers) that share the same server port, enabling full use of multi-core CPUs and handling more requests in parallel.
+    Benefits of Clustering:
+
+    i- Better CPU Utilization – Uses multiple cores.
+    ii- Increased Throughput – Handles more concurrent requests.
+    iii- Fault Tolerance – If one worker crashes, others keep running.
+    iv- Scalability – Handles high-traffic apps more efficiently.
 
 24-What are worker threads in Node.js?
+    Worker Threads in Node.js allow running JavaScript in parallel on multiple threads inside the same process. They are mainly used for CPU-intensive tasks, unlike clustering which creates separate processes for I/O scalability. Worker threads can share memory using SharedArrayBuffer and communicate via message passing, making them useful for heavy computations without blocking the event loop.
 
 25-What are the differences between cluster, child_process, and worker_threads?
+    cluster:
+    have multiple process
+    each process has its own memory space
+
+    child_process:
+    have multiple process
+    each process has its own memory space
+
+    worker_threads: 
+    have multiple threads within one process
+    can share memory (SharedArrayBuffer)
 
 26-How does Node.js manage memory?
+    Node.js manages memory using the V8 engine. Memory is divided into stack (primitives, function calls) and heap (objects, closures). The heap is further split into new space and old space, managed by V8’s garbage collector using algorithms like Scavenge and Mark-Sweep-Compact. Buffers and native modules allocate memory outside the V8 heap. Node.js provides process.memoryUsage() and debugging tools to monitor memory, and developers must avoid leaks caused by global variables, unclosed timers, or event listeners.
+
 
 27-What is the difference between event-driven programming and multi-threaded programming?
+    event-driven programming:- A programming paradigm where the flow of the program is determined by events (user actions like clicks, key presses, or system-generated signals like network requests).
+    The program usually runs in a single thread.
+    There’s an event loop that continuously listens for events.
+    multi-threaded programming:-A programming model where a program can execute multiple threads of execution concurrently.
+
 
 28-How can you prevent callback hell in Node.js?
+    Callback hell happens when multiple nested callbacks make code unreadable and hard to maintain. We can prevent it in several ways:
+    we can use promises or async/await to avoid callback hell.
 
 29-What is the difference between synchronous and asynchronous error handling?
+    Synchronous error handling deals with errors in the same call stack and can be caught directly with try/catch. Asynchronous error handling deals with errors that occur later (e.g., in callbacks, Promises, or async functions). For async code, we use callbacks with error parameters, .catch() with Promises, or try/catch with async/await.
 
 30-How do you secure a Node.js application?
+    a- Validate all user inputs (use libraries like Joi or express-validator).
+        const { body } = require("express-validator");
+        app.post("/user", [
+        body("email").isEmail(),
+        body("name").trim().escape(),
+        ], handler);
+    b- Use helmet to set secure HTTP headers.
+
+    c- To secure a Node.js application, I focus on validating and sanitizing input, preventing XSS/CSRF, securing authentication and authorization with bcrypt and JWT, enforcing HTTPS, using Helmet and rate limiting for common attack prevention, handling errors safely, keeping dependencies updated, and applying deployment best practices like least privilege and monitoring.
+    d- Avoid using untrusted or outdated packages.
+    e- Secure Authentication & Authorization
+        Use JWTs or OAuth2 for authentication.
+        Store passwords with bcrypt (never in plain text).
+        Implement role-based access control (RBAC).
 
 31-What is load balancing in Node.js and how is it achieved?
-
+Load balancing is the process of distributing incoming network traffic (HTTP requests) across multiple servers or processes so no single instance is overwhelmed. This ensures high availability, scalability, and reliability of a Node.js application.
 
 
