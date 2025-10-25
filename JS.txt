@@ -55,5 +55,20 @@
     Returns the first element that matches a condition.
     Returns a single value (or undefined if no match).
 
+6- Proxy in JavaScript :
+A Proxy is an object that wraps another object and allows you to intercept and customize fundamental operations on that object — like getting a property, setting a value, deleting a key, etc.
+
+const user = { name: "Mritunjay", age: 25 };
+const dataProxy = new Proxy(user,{
+    get(target,property){
+        return target[property]
+    }
+    set(tareget,property,value){
+        return tareget[property] = value
+    }
+})
+
+7- Hoisting: Hoisting is default behaviour of js where variable or function declearation are moved on top of their containg scope during compile
+
 
  

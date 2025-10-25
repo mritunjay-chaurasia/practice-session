@@ -106,12 +106,39 @@
 // 2 3
 // 4 5 6
 // 7 8 9 10
+// for(let i = 1; i <= 4; i++){
+//     let sum = 0
+//     let row = ""
+//     for(let j = 1 ; j <= i; j++){
+//         sum += j
+//     }
+//     for(let j = 1 ; j <= i; j++){
+//         row += j + sum - i + " "
+//     }
+//     console.log(row)
+// }
 
 //Q.9 Pyramid with numbers:
 //     1
 //    121
 //   12321
 //  1234321
+
+for(let i = 1; i <= 4; i++){
+    let row = " "
+    // for(let m = 4 ; m > i; m-- ){
+    //     row += " "
+    // }
+    // for(let j = 1; j <= i; j++){
+    //     row += j
+    // }
+
+    for(let z = 0; z <= i; z--){
+        console.log(z)
+        // row += j
+    }
+//    console.log(row)
+}
 
 
 
@@ -220,7 +247,23 @@
 // 0 1
 // 1 0 1
 // 0 1 0 1
+// for(let i = 1 ; i <= 4; i++){
+//     let start = (i % 2 !== 0) ? 1 : 0
+//     let row = ""
+//     for(let j = 0 ; j < i ; j++){
+//       row += start + " "
+//       start = 1 - start
+//     }
+//      console.log(row)
+// }
 
 // Q.24
-//const str = "hello every one"
+//const para = "hello every one"
 //output = "Hello Every One"
+// const arr = para.split(' ')
+// const res = []
+// for(let i = 0; i < arr.length; i++){
+//     const data = arr[i].charAt(0).toUpperCase() + arr[i].slice(1)
+//     res.push(data)
+// }
+// console.log(res.join(" "))

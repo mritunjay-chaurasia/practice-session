@@ -1,0 +1,59 @@
+1- State => Internal data managed by the component and that will be changed over time.
+2- props =>  External data pass from parent component to child component
+3- key => key prop are used to uniquely identify the  element in a list.
+4- Controlled component:- form input value is controlled by react state. 
+   UnControlled component:- form input value is store in dom. Accessged using ref.
+5- Pitfalls: Putting too much state in single context
+6- React context: React context provides a way to share golbal state.
+7- useEffect => does not block using for DOM manipulation, fetching data after intial render
+useLayoutEffect => blocks rendering until executed. 
+8- dependency array of useEffect affect => array determines when the effect should be re-executed after renders.
+
+9- useCallback => used for memoized function that used performance optimized and prevent    unnecessarily rerender and specialy used inside child component.
+
+10- useMemo => used for memoized result of function that improve performance
+
+11- useReducer => that are used for managed complex state logic and it is alternative of useState
+12- useReducer is a function that take current state and action as an argument  and after proccessing  return new state. 
+
+13- useRef => used for accessing DOM element, Storing mutable values, Managing focus
+
+14- forwardRef() => is a React API that allows a component to pass ref in child component
+
+15- React hydration => is the process where server rendered html page  on client side 
+
+16- React Suspense => React Suspense is a feature that allows you to handling asynchronus operation like data fetching or code splitting by showing fallback content while waiting a resource.
+
+17- Reconciliation => Reconciliation is the proccess , which are used to compare between new virtual dom with previous virtual dom and diffing to determine  and then update DOM effeciently
+
+
+18- React.memo => React.memo is a HOC that memoizes function component and preventing it  re-rendring unless it prop changed 
+
+19- Optimize a MERN application for performance =>
+    a- Memoization: 
+        Use React.memo for components and useMemo or useCallback for
+        values/functions.
+    b- Code splitting / lazy loading:
+    c- Avoid anonymous functions in render
+    d- Use indexing and aggregation in MongoDB
+    e- Use lazy loading and memoization in react 
+    f- Implement caching with Redis
+    g- Apply pagination and limit queries
+    f- Use async/await with proper error handing in node/express   
+
+20- What’s the difference between componentDidMount and useEffect in React?
+componentDidMount is a lifecycle method used in class components, while useEffect is a hook for function components that can handle mounting, updating, and cleanup
+
+21- How do you handle state management in React?
+Local state: useState or useReducer
+Global state: context Api or reducx toolkit
+
+
+
+
+
+
+
+
+
+

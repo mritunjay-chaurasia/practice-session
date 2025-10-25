@@ -1,0 +1,27 @@
+1- How do you secure REST APIs built with Express.js?
+    Use JWT authentication.
+    Sanitize inputs to prevent injection attacks.
+    Use Helmet and CORS properly.
+    Apply rate limiting.
+    Validate data using Joi or Zod.
+
+2. Explain how middleware works in Express.js.
+    Middleware functions are functions that have access to the request and response objects. They can modify them or terminate the request cycle. Example uses: authentication, logging, error handling, and data parsing.
+
+3. What are the benefits of using TypeScript in Node.js?
+    Type safety reduces runtime errors.
+    Easier refactoring and maintainability.
+
+4. Advantage of using express.js
+    a- Simplified web developement
+    b- flexible routing system
+    c- Middleware support
+    d- Template engine integration
+
+5- Purpose of app.use() used to execute funtion globally
+6- Request Pipeline in express :
+   It is a series of middleware function that handle incomming HTTP request and pass control to the next function
+7- CORS (Cross origin resource sharing): Browser block frontend javascript code from making request from one port to another port 
+
+
+
