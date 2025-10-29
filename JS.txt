@@ -68,7 +68,79 @@ const dataProxy = new Proxy(user,{
     }
 })
 
-7- Hoisting: Hoisting is default behaviour of js where variable or function declearation are moved on top of their containg scope during compile
+7- Hoisting: Hoisting is js mechanism where variable and function declarations are moved to the top of their containing scope during the compile phase.
+console.log(x) //undefined
+var x  = 10
+variable hoisted but not intialized
+console.log(z) // reference error
+let z = 5 or const z = 4
+
+8- genrators function => it is special function that can pause execution and resume at a later point 
+
+9- .call, .apply, .bind => are used to invokes function  
+Method	  Calls immediately?	Pass args	   Returns new function?	
+.call()	    ✅ Yes	         Individually	       ❌ No	
+.apply()	✅ Yes	         Array	               ❌ No	
+.bind()	    ❌ No	         Individually	       ✅ Yes
+function greet(a,b) {
+    console.log(a + b)
+}
+greet.call(null,1,2)
+greet.apply(null,[1,2])
+
+10- higher-order function => 
+A higher order function is any function that takes one or more functions as an arguments and return a function as a result 
+
+11- callback functions: callback function is a function passed another function as an arguments. They are used to perfom asynchronous operations like handling events, making api calls, or reading files etc.
+
+12- Recursion : Recursion is a programing technique to call itself to solved problem.
+
+13- shallow copy and deep copy : A shallow copy duplicates the top-level properties of an object, but  A deep copy duplicates all levels of an object
+
+14- JavaScript object getters and setters are used to control access to an object’s properties . 
+Getters and setters are defined using the get and set keywords, respectively,
+followed by a function that is executed when the property is accessed or assigned a new
+value.
+
+15- synchronous and asynchronous functions: synchronous function are blocking while asynchronous function are not .
+In synchronous function , statements complete before the next statement is run.
+In Asynchronous function , usuallly accept a callback as a parameter and execution
+continue on to the next line immediately
+
+16- Promises => Promises in JavaScript is an object that represent the eventual completion (or failure) of an asynchronous operation and its resulting value. They have three state: pending , fulfilled, rejected . You can handle the result of promise using the .then() method for success and the .catch() method for errors.
+
+17- Promise.all() && Promise.allSettled() => 
+Promise.all() and Promise.allSettled() are both methods for handling multiple
+promises in JavaScript, but they behave differently. Promise.all() waits for all
+promises to resolve and fails fast if any promise rejects, returning a single rejected
+promise. Promise.allSettled() , on the other hand, waits for all promises to settle
+(either resolve or reject) and returns an array of objects describing the outcome of each
+promise
+
+18- What is a closure in JavaScript, and how/why would you use one?
+A closure is created when a function “remembers” the variables from its outer scope, even after that outer function has finished executing.
+
+19- event.preventDefault() : are used to prevent the default action that belong to event,such as preventing a form from submitting. 
+event.stopPropagation() is used to preventing any parent event handlers from being executed.
+
+20- 
+Cookies: Suitable for server-client communication, small storage capacity, can be
+persistent or session-based, domain-specific. Sent to the server on every request.
+localStorage : Suitable for long-term storage, data persists even after the
+browser is closed, accessible across all tabs and windows of the same origin,
+highest storage capacity among the three.
+sessionStorage : Suitable for temporary data within a single page session, data is
+cleared when the tab or window is closed, has a higher storage capacity compared
+to cookies.
+
+21- 
+JavaScript: types are checked at runtime
+            Scripting language for web development
+
+TypeScript: types are checked at compile time
+            Superset of JavaScrip
+
+
 
 
  

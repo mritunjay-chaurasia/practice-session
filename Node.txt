@@ -54,6 +54,7 @@
         Modules you create yourself and use in your project.
     c- Third-party Modules
         installed via npm (ex. express, mongoose)
+        
 7- What is the difference between synchronous and asynchronous code in Node.js?
     a- Synchronous-
         Executes line by line (blocking).
@@ -137,7 +138,7 @@
     Node.js uses the built-in child_process module to create and manage child processes. It provides methods like spawn, exec, execFile, and fork to run system commands or separate Node.js scripts. Child processes run outside the main event loop and communicate with the parent via events or IPC, which helps avoid blocking and enables parallel execution of heavy tasks.
 
 17- Explain streams in Node.js and their types.
-    Streams are objects in Node.js that let you read or write data continuously instead of loading it all at once.
+    In NodeJS, streams are a powerful way to handle data in chunks rather than loading the entire data into memory. Streams allow for the efficient processing of large volumes of data, especially in situations where the data size is too large to fit into memory all at once.
 
     They are especially useful for large files, network requests, or real-time data.
 
@@ -301,4 +302,16 @@ with promises we can use .catch() method and in modern code async/await with try
 31-What is load balancing in Node.js and how is it achieved?
 Load balancing is the process of distributing incoming network traffic (HTTP requests) across multiple servers or processes so no single instance is overwhelmed. This ensures high availability, scalability, and reliability of a Node.js application.
 
+32- callback hell?
+Callback hell is an issue caused by a nested callback. 
+To overcome this situation, we use promises.
 
+
+33- passport module in NodeJS?
+    This middleware is used for implementing authentication and authorization in Express applications.
+
+34- Redis module.
+    Redis is an Open Source store for storing data structures.It can store data structures as a strings, hashes, indexes,stream.It is very usefull for reducing cache size.
+
+35-  web socket?
+    Web Socket is a protocol that provides full-duplex (multiway) communication i.e. allows communication in both directions simultaneously. Web Socket is a modern web technology in which there is a continuous connection between the user’s browser (client) and the server. In this type of communication, between the web server and the web browser, both of them can send messages to each other at any point in time.

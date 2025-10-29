@@ -6,7 +6,7 @@
     Validate data using Joi or Zod.
 
 2. Explain how middleware works in Express.js.
-    Middleware functions are functions that have access to the request and response objects. They can modify them or terminate the request cycle. Example uses: authentication, logging, error handling, and data parsing.
+    Middleware functions are functions that have access to req, res, and next objects. They execute code, modify requests/responses, or end the request-response cycle.
 
 3. What are the benefits of using TypeScript in Node.js?
     Type safety reduces runtime errors.
@@ -22,6 +22,20 @@
 6- Request Pipeline in express :
    It is a series of middleware function that handle incomming HTTP request and pass control to the next function
 7- CORS (Cross origin resource sharing): Browser block frontend javascript code from making request from one port to another port 
+8- REST APIs => (Representational State Transform) Application programming Interface are architectural style for designing networked application . It is stateless and follow protocol of http or https. format like json and xml
+SOAP API => Simplified Object Access protocol and follow protoco http or smtp and have state or stateless 
+
+9- Libuv library: Provides a thread pool and handles background tasks like file system operations and networking.
+
+10- Non-blocking I/O: Lets Node.js process thousands of concurrent requests efficiently without creating multiple threads
+
+ 11- What are some popular alternatives to ExpressJS?
+    There are several popular alternatives to ExpressJS which includes:
+    Koa.js
+    Hapi.js
+    Sails.js
+    Fastify
+
 
 
 
