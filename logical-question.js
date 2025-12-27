@@ -124,21 +124,22 @@
 //   12321
 //  1234321
 
-for(let i = 1; i <= 4; i++){
-    let row = " "
-    // for(let m = 4 ; m > i; m-- ){
-    //     row += " "
-    // }
-    // for(let j = 1; j <= i; j++){
-    //     row += j
-    // }
+// for (let i = 1; i <= 4; i++) {
+//     let row = " "
 
-    for(let z = 0; z <= i; z--){
-        console.log(z)
-        // row += j
-    }
-//    console.log(row)
-}
+//     for (let m = 4; m > i; m--) {
+//         row += " "
+//     }
+
+//     for (let j = 1; j <= i; j++) {
+//         row += j
+//     }
+
+//     for (let z = i - 1; z >= 1; z--) {
+//         row += z
+//     }
+//     console.log(row)
+// }
 
 
 
@@ -157,6 +158,13 @@ for(let i = 1; i <= 4; i++){
 // *****
 // *****
 // *****
+// for (let i = 1; i <= 4; i++) {
+//     let row = ""
+//     for (let j = 1; j <= 5; j++) {
+//         row += "*"
+//     }
+//     console.log(row)
+// }
 
 //Q.12 Right-angled triangle:
 // *
@@ -164,6 +172,13 @@ for(let i = 1; i <= 4; i++){
 // ***
 // ****
 // *****
+// for (let i = 1; i <= 5; i++) {
+//     let row = ""
+//     for (let j = 1; j < i + 1 ; j++) {
+//         row += "*"
+//     }
+//     console.log(row)
+// }
 
 //Q.13 Inverted triangle:
 // *****
@@ -171,6 +186,14 @@ for(let i = 1; i <= 4; i++){
 // ***
 // **
 // *
+
+// for (let i = 5; i >= 1; i--) {
+//     let row = ""
+//     for (let j = i; j >= 1; j--) {
+//         row += "*"
+//     }
+//     console.log(row)
+// }
 
 
 //Q.14 Pyramid
@@ -267,3 +290,32 @@ for(let i = 1; i <= 4; i++){
 //     res.push(data)
 // }
 // console.log(res.join(" "))
+
+//q.25 print number from 1 to 10 every second
+// let count = 1
+// const intervalId = setInterval(() => {
+//     console.log(count)
+//     count++
+//     if(count > 10){
+//         clearInterval(intervalId)
+//     }
+// }, 1000);
+
+// Program to check if a word is a palindrome
+function isPalindrome(word) {
+   const length = word.length;
+   // loop through half of the word
+   for (let i = 0; i < length / 2; i++) {   
+      // check if first and last characters are the same
+      if (word[i] !== word[length - 1 - i]) {
+         return 'This is not a palindrome';
+      }
+   }
+   return 'This is a palindrome';
+}
+// take input
+const inputWord = "hello";
+
+// call the function
+const result = isPalindrome(inputWord);
+console.log(result);

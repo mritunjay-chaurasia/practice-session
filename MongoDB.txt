@@ -1,0 +1,86 @@
+1-  Index in MongoDB?
+Indexes improve query performance by allowing MongoDB to quickly find documents instead of scanning the entire collection.
+An index in mongodb is a data structures that improves the speed of data fetching operations on a collection. You can create an index using the createIndex method.
+db.collection.createIndex({name:1}) 
+
+2- Perform data import and export in mongodb
+you can use mongoimport and mongoexport tools. using this tool we can import data from JSON , csv or TSV file into mongodb
+
+3- Aggregation Framework in MongoDB
+Aggregation framework is a powerful tool for performing , data processing and transformation on documents within a collection.This framework is particularly useful for creating complex data transformations
+such as filtering, grouping, sorting, reshaping and computing aggregations.
+
+Aggregation operations in mongodb are performed using aggregate method.
+db.sale.aggregate([
+    {$match:{status:"completed"}},
+    {$group:{_id:"$product",totalSales:{$sum:"$amount"}}},
+    {$sort:{totalSales:-1}}
+])
+
+4- How to Handle Transactions in MongoDB?
+MongoDB supports multi-document ACID transactions by allowing us to perform a series of read and write operations across multiple documents and collections in a transaction. This ensures data consistency and integrity. To use transactions we typically start a session, begin a transaction, perform the operations and then commit or abort the transaction.
+
+5- What is MongoDB and how is it different from SQL databases?
+Mongodb is NoSQL , document based database , stores data in binary json format.
+Data stored as document , not table or row
+It is schemaless
+Uses collection instead of tables
+
+6- What is BSON?
+BSON (Binary JSON) is the format MongoDB uses internally to store documents. It supports additional data types (like Date, ObjectId, Binary) beyond JSON.
+
+7- What is an upsert?
+when using updateOne() or updateMany(), then upsert option create new document if no match found.
+
+8- What is $lookup used for?
+Performs a join-like operation between two collections.
+db.orders.aggregate([
+  {
+    $lookup: {
+      from: "users",
+      localField: "userId",
+      foreignField: "_id",
+      as: "userDetails"
+    }
+  }
+])
+4
+9- How do you handle transactions in MongoDB?
+MongoDB supports ACID transactions on replica sets and sharded clusters.
+const session = await mongoose.startSession();
+session.startTransaction();
+try {
+  await User.updateOne({ _id: id }, { $inc: { balance: -100 } }, { session });
+  await Order.create([{ userId: id, amount: 100 }], { session });
+  await session.commitTransaction();
+} catch (err) {
+  await session.abortTransaction();
+}
+session.endSession();
+
+10- Pre and Post Hooks (Middleware) in MongoDB
+They allow you to run custom logic before or after certain database operations — like save, find, update, or delete.
+Pre hook => Runs before mongodb action (before saving a document) for validate data, hash password, modified fields
+Post hook => Runs after mongodb action (after saving a document) for log events, send notification, tigger update
+
+11- Compound index => A compound index in an mongodb have index on multiple fields of a document handle queries that filter or sort more than one field. 
+db.users.createIndex({city:1,age:-1})
+
+then db.users.find({ city: "Delhi", age: 25 });
+
+12- MongoDB supports GeoJSON format for geospatial queries.
+db.users.find({
+  location: {
+    $near: {
+      $geometry: {
+        type: "Point",
+        coordinates: [77.5946, 12.9716]
+      },
+      $maxDistance: 40000 // 40 km in meters
+    }
+  }
+});
+
+
+Coordinates must be in [longitude, latitude] order (not latitude first).
+type must be "Point".

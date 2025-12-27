@@ -13,8 +13,9 @@ useLayoutEffect => blocks rendering until executed.
 
 10- useMemo => used for memoized result of function that improve performance
 
-11- useReducer => that are used for managed complex state logic and it is alternative of useState
-12- useReducer is a function that take current state and action as an argument  and after proccessing  return new state. 
+11- useReducer => that are used for managed complex state logic and it is alternative of useState and is a function that take current state and action as an argument  and after proccessing  return new state. 
+
+12- extraReducer
 
 13- useRef => used for accessing DOM element, Storing mutable values, Managing focus
 

@@ -118,7 +118,15 @@ promise. Promise.allSettled() , on the other hand, waits for all promises to set
 promise
 
 18- What is a closure in JavaScript, and how/why would you use one?
-A closure is created when a function “remembers” the variables from its outer scope, even after that outer function has finished executing.
+A closure is created when a fucntion remembers the varriables from its outer scope
+
+function outer(){
+    let count = 0
+    function inner(){
+        count ++
+    }
+}
+
 
 19- event.preventDefault() : are used to prevent the default action that belong to event,such as preventing a form from submitting. 
 event.stopPropagation() is used to preventing any parent event handlers from being executed.
@@ -139,6 +147,30 @@ JavaScript: types are checked at runtime
 
 TypeScript: types are checked at compile time
             Superset of JavaScrip
+
+22- 
+Event Bubbling: event starts from child to parent (innert to outer)
+Event Capturing: event start from  parent to child (outer to inner)
+
+23- map and forEach => map function returns an array while forEach return undefined
+
+24- Event delegation => Event delegation is a javascript technique which allows us to  add singal events listener to parent element.
+
+25- Interview Question
+console.log("A");
+setTimeout(() => console.log("B"), 0);
+Promise.resolve().then(() => console.log("C"));
+console.log("D");
+
+Ans:= ADCB
+console.log("A"); and console.log("D"); is synchronous and goes directly to callstack and Executes immediately
+setTimeout is asynchronous and sent to the macrotask queue, Even with 0ms, it does NOT run immediately
+Promise.resolve() resolves immediately
+.then() callback goes to the Microtask Queue
+Microtasks have higher priority than macrotasks
+
+
+
 
 
 

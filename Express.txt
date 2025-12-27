@@ -36,6 +36,34 @@ SOAP API => Simplified Object Access protocol and follow protoco http or smtp an
     Sails.js
     Fastify
 
+12- Rate Limiting
+Rate limiting is a technique, used to control the number of request a client 
+
+    const express = require('express');
+    const rateLimit = require('express-rate-limit');
+    const app = express();
+
+    // Create a rate limiter
+    const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per window
+    message: 'Too many requests from this IP, please try again later.',
+    });
+
+    // Apply to all routes
+    app.use(limiter);
+
+    app.get('/', (req, res) => {
+    res.send('Welcome to the API');
+    });
+
+    app.listen(5000, () => console.log('Server running on port 5000'));
+
+Now each IP can only send 100 requests per 15 minutes.
+After exceeding that, the server automatically responds with 429 Too Many Requests
+
+
+
 
 
 
