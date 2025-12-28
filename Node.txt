@@ -151,52 +151,7 @@
 
     Buffers help Node.js handle binary data directly (since JavaScript normally works with strings and doesn’t handle raw bytes well)
 
-19-Explain middleware in Node.js (with Express).
-In Express.js, middleware is a function that has access to:
-    req (request object)
-    res (response object)
-    next (a function to pass control to the next middleware)
-Middleware functions sit between the request and response cycle of an Express app.
-Types of Middleware in Express:
-a- Application-level middleware
-    Defined using app.use() or app.METHOD()
-
-    app.use((req, res, next) => {
-    console.log("Time:", Date.now());
-    next();
-    });
-b- Router-level middleware
-    Works like app-level but applied only to specific routes.
-
-    const router = express.Router();
-    router.use((req, res, next) => {
-    console.log("Router middleware");
-    next();
-    });
-
-c- Built-in middleware (provided by Express)
-
-    express.json() → parses JSON requests
-    express.urlencoded() → parses URL-encoded data
-    express.static() → serves static files
-
-    app.use(express.json());
-    app.use(express.static("public"));
-
-d- Error-handling middleware
-    Must have 4 parameters: (err, req, res, next)
-
-    app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send("Something broke!");
-    });
-
-e- Third-party middleware
-    Installed via npm.
-    Example: morgan (logging), cors (Cross-Origin Resource Sharing).
-
-    const morgan = require("morgan");
-    app.use(morgan("dev"));
+19-
 
 20-What is CORS and how do you handle it in Node.js?
     CORS stands for Cross-Origin Resource Sharing, a browser security feature that restricts cross-domain requests. In Node.js (with Express), we typically handle it using the cors package or by manually setting Access-Control-Allow-* headers. This tells the browser which origins, methods, and headers are allowed, and handles preflight requests for methods like POST/PUT/DELETE.

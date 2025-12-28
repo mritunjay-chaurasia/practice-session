@@ -6,7 +6,55 @@
     Validate data using Joi or Zod.
 
 2. Explain how middleware works in Express.js.
-    Middleware functions are functions that have access to req, res, and next objects. They execute code, modify requests/responses, or end the request-response cycle.
+    Middleware are a function that runs between the client request and the server response.
+    Middleware can do like:
+    a- Executes logic
+    b- handle authentication and authorization
+    c- validate data
+    d- handle errors
+    e- modified request and response
+    f- pass control using next()
+    g- log request
+Types of Middleware in Express:
+a- Application-level middleware
+    Defined using app.use() or app.METHOD()
+
+    app.use((req, res, next) => {
+    console.log("Time:", Date.now());
+    next();
+    });
+b- Router-level middleware
+    Works like app-level but applied only to specific routes.
+
+    const router = express.Router();
+    router.use((req, res, next) => {
+    console.log("Router middleware");
+    next();
+    });
+
+c- Built-in middleware (provided by Express)
+
+    express.json() → parses JSON requests
+    express.urlencoded() → parses URL-encoded data
+    express.static() → serves static files
+
+    app.use(express.json());
+    app.use(express.static("public"));
+
+d- Error-handling middleware
+    Must have 4 parameters: (err, req, res, next)
+
+    app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+    });
+
+e- Third-party middleware
+    Installed via npm.
+    Example: morgan (logging), cors (Cross-Origin Resource Sharing).
+
+    const morgan = require("morgan");
+    app.use(morgan("dev"));
 
 3. What are the benefits of using TypeScript in Node.js?
     Type safety reduces runtime errors.
