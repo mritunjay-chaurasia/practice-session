@@ -68,7 +68,9 @@ const dataProxy = new Proxy(user,{
     }
 })
 
-7- Hoisting: Hoisting is js mechanism where variable and function declarations are moved to the top of their containing scope during the compile phase.
+7- Hoisting: Hoisting is a JavaScript behavior where variable and function declarations are moved to the top of their scope during the compilation phase (before code execution).
+or
+Hoisting allows variables or functions to be used before they are decleared in the code.
 console.log(x) //undefined
 var x  = 10
 variable hoisted but not intialized
@@ -118,7 +120,8 @@ promise. Promise.allSettled() , on the other hand, waits for all promises to set
 promise
 
 18- What is a closure in JavaScript, and how/why would you use one?
-A closure is created when a fucntion remembers the varriables from its outer scope
+A closure are created when a fucntion remembers the varriables from its outer scope,
+directly does not copy the variable value , it is copy the reference of variable to store in memory
 
 function outer(){
     let count = 0
@@ -127,6 +130,20 @@ function outer(){
     }
 }
 
+or
+inside below i have used closure concept for print 1-10 number otherwise it print 11 number 10 times so in case var keyword need to use closure method otherwise in case of let keyword no need to closure  
+a- In this case
+for(var i = 1; i <= 10; i++){
+    ((i)=>{
+        console.log(i)
+        result will be like 1,2,3,4,5,6,7,8,9,10 
+    })(i)
+}
+b- In this case
+for(var i = 1; i <= 10; i++){
+    console.log(i)
+    result will be like 11,11,11,11,11,11,11,11,11,11
+}
 
 19- event.preventDefault() : are used to prevent the default action that belong to event,such as preventing a form from submitting. 
 event.stopPropagation() is used to preventing any parent event handlers from being executed.

@@ -1,0 +1,467 @@
+1- What is Box model (CSS Box model)?
+    The CSS box model defines the layout and spacing of elements using content, padding, border, and margin.It is a core concept in frontend development that defined hot elments are structured and spaced on a webpage
+
+2- What is flex?
+    Flex  is a CSS layout model used to design responsive and flexible layouts easily, especially for 1-dimensional layouts (row or column).
+
+3- What is metatype?
+    Metatype is the runtime type or class of a parameter that NestJS uses to perform validation and transformation
+
+4- What is Semantic Elements?
+    These clearly describe their role:
+    <header></header>
+    <nav></nav>
+    <main></main>
+    <section></section>
+    <article></article>
+    <aside></aside>
+    <footer></footer>
+    Why Semantic HTML is Important
+
+    ✔ Better SEO (search engines understand content)
+    ✔ Better Accessibility (screen readers work properly)
+    ✔ Cleaner & readable code
+    ✔ Easier maintenance
+
+5- What is inline tag?
+    An inline tag is an HTML element that does not start on a new line and take only the space required by their content.
+    <span>, <a>, <img>, <strong>, <label>, <input>, <b>, <i>, <em>
+
+6- Types of position in css?
+    There are five type of position in css
+    a- fixed, b- static, c- relative, d- absolute, e- sticky
+    Absolute looks for nearest parent with position:relative  
+
+7- What is event-loop?
+Event-loop is mechanisum in nodejs that are used to handle none-blocking , asynchronus operation using a single-threaded of nodejs.
+Event loop are used to handle thousands of million request 
+
+8- Diff between node and express
+Nodejs => Nodejs is a single threaded run time environment that allow javascript to run on server using the V8 engine.
+Express.js is a lightweight web framework built on top of Node.js that simplifies building APIs and web applications.
+
+9- Diff between SSR and CSR?
+    SSR (Server-Side Rendering) means HTML is generated on the server for every request and sent to the browser as a fully rendered page.
+    CSR (Client-Side Rendering) means the browser renders the page using JavaScript after loading a minimal HTML file.
+    
+    When to Use SSR?
+        Blogs
+        E-commerce
+        Marketing pages
+        SEO-driven content
+
+    When to Use CSR?
+        Dashboards
+        Admin panels
+        Authenticated apps
+        Heavy user interaction
+
+10- Diff betweenn redis and mongodb
+    Redis
+    Redis is an in-memory data store used mainly for caching, session storage, queues, and real-time data.
+    MongoDB
+    MongoDB is a NoSQL document database used for persistent storage of application data.
+
+11- How to handle transcation in mongodb?
+    A transaction in mongodb that allow you to execute multiple operation as a single atomic unit, 
+    Either all operation sucessfully completed or all fail.exam => Transfer money, order + inventory update ect.m
+
+12- How to handle large number of data in nodejs?
+    In node.js , large number of data are handle using pagination, indexing, horizontal scalling, worker_threads, streams, redis 
+
+13- What is REST API?
+    REST API stands for Representational State Transfer Application Programming Interface.
+    A REST API allows applications to communicate with each other using HTTP methods like GET, POST, PUT, and DELETE, where data is exchanged in formats like JSON, and each request is stateless.
+
+    Stateless means:-
+    Each request contains all information
+    Server does not store client state
+
+    | REST        | SOAP    |
+    | ----------- | ------- |
+    | Lightweight | Heavy   |
+    | JSON        | XML     |
+    | Faster      | Slower  |
+    | Easy        | Complex |
+
+    | REST               | GraphQL           |
+    | ------------------ | ----------------- |
+    | Multiple endpoints | Single endpoint   |
+    | Fixed response     | Flexible response |
+    | Simple             | More complex      |
+
+14- How to handle unmount method in react?
+    In React, the unmount phase is handled by componentWillUnmount in class components and by returning a cleanup function from useEffect in functional components, where we clean up timers, subscriptions, listeners, and cancel API calls to avoid memory leaks.
+    useEffect(()=>{
+        const timer = setInterval(()=>{
+            console.log()
+        },1000)
+
+        return () =>{
+            clearInterval(timer)
+        }
+    },[])
+
+15- What is aggregation?
+    Aggregation in MongoDB is used to process data, transform it, and return computed results
+    Aggregation have multiple stage where each stage are:
+    take input document
+    perform operation
+    pass output to next stage
+
+    Aggregation operations in mongodb are performed using aggregate method.
+    db.sale.aggregate([
+        {$match:{status:"completed"}},
+        {$group:{_id:"$product",totalSales:{$sum:"$amount"}}},
+        {$sort:{totalSales:-1}}
+    ])
+
+16- What is indexing?
+Indexing is a database technique that improves query performance by creating a lookup structure on fields so the database can retrieve records faster without scanning the entire dataset.
+    use for:
+        Faster queries
+        Better performance
+How Indexing Works (Concept)
+    Database creates an index structure (B-Tree / Hash)
+    Index stores field value + pointer to actual record
+    Query uses index to directly locate data
+    📌 Similar to a book index.
+
+17- What is Hooks?
+    Hooks are special functions introduced in React 16.8 that allow you to use state and other React features in functional components, without writing class components.
+
+18- Diff between React and Nextjs
+    React is a JavaScript library used to build user interfaces, mainly client-side rendered (CSR) applications.
+    Next.js
+    Next.js is a React framework that adds server-side rendering, routing, and backend capabilities on top of React.
+
+19- How to handle asynchronus operation without using Async/await in backend?
+Asynchronous operations can be handled without async/await using callbacks, Promises with then/catch,
+
+20- How to save file in mongodb?
+Files can be stored in MongoDB using GridFS for large files or as Base64 for small files, but in production it’s best to store files in cloud storage and save only the file URL in MongoDB.
+
+Convert file → Base64 string
+Save inside MongoDB document
+
+21- Diff between Mysql, Postgresql and NoSql
+    | Feature      | MySQL            | PostgreSQL                | NoSQL                   |
+    | ------------ | ---------------- | ------------------------- | ----------------------- |
+    | Type         | Relational (SQL) | Relational (Advanced SQL) | Non-Relational          |
+    | Schema       | Fixed            | Fixed (very strict)       | Flexible / Dynamic      |
+    | ACID         | Yes              | Yes (very strong)         | Varies (often eventual) |
+    | Joins        | Yes              | Yes (powerful)            | Limited / No            |
+    | Transactions | Yes              | Advanced                  | Limited                 |
+    | JSON Support | Limited          | Excellent (JSONB)         | Native                  |
+    | Scalability  | Vertical         | Vertical + Horizontal     | Horizontal (easy)       |
+    | Performance  | Fast for reads   | Best for complex queries  | High for big data       |
+    | Use Case     | Simple apps      | Complex systems           | Big data / real-time    |
+
+    Use MySQL When:
+    ✅ Simple CRUD apps
+    ✅ Small to medium projects
+    ✅ Read-heavy workloads
+
+    Use PostgreSQL When:
+    ✅ Complex queries
+    ✅ Financial systems
+    ✅ Analytics
+    ✅ Strong data consistency
+
+    Use NoSQL When:
+    ✅ Large-scale apps
+    ✅ Flexible schema
+    ✅ Real-time data
+    ✅ Distributed systems
+
+
+22- How to google singup
+    User clicks “Sign in with Google”
+    Google authenticates the user
+    Google returns an ID token
+    Backend verifies token with Google
+    Backend creates/fetches user
+    Backend returns JWT / session
+    User is logged in
+
+23- Why to use interceptor?
+    Interceptors allow us to modify, handle, or log requests and responses globally before they are sent or received.    Every request must pass through it
+    Useful for:
+        Debugging
+        Performance monitoring
+        Token Refresh Flow
+
+24- Diff between Object.key(), Object.vale(), Object.entries()
+    Object.value() => returns an array of value
+    Object.keys() => returns an array of keys
+    Object.entries() => returns an array of key and value
+
+25- Thread pool in nodejs
+    The Node.js thread pool is a set of worker threads (managed by libuv) that execute blocking operations asynchronously, allowing the event loop to stay responsive.
+    Node.js uses a thread pool managed by libuv to execute blocking operations like file system and crypto tasks asynchronously, keeping the event loop non-blocking. The default size is 4 threads.
+    How Thread Pool Works (Step-by-Step)
+        JS code requests async operation (e.g. fs.readFile)
+        Task is sent to libuv thread pool
+        Worker thread executes task
+        Callback is pushed to event loop
+        Event loop executes callback
+
+26- What is CallStack?
+The call stack stores function calls in the order they are invoked and removes them when execution is completed (LIFO – Last In, First Out).
+
+function first() {
+  second();
+}
+function second() {
+  third();
+}
+function third() {
+  console.log("Hello");
+}
+first();
+
+
+27- Hoisting in js?
+Hoisting is javascript behavior where variables or functions decreations are moved at the top of their scope during the compilation phase (before code execution)
+    Hoisting Works (Conceptually)
+    JavaScript engine:
+        Allocates memory for variables & functions
+        Executes code line by line
+Example:-
+    a- var (Hoisted + initialized as undefined)
+        console.log(a); // undefined
+        var a = 10;
+
+        Behind the scenes:
+        var a;
+        console.log(a);
+        a = 10;
+    b- let and const (Hoisted but NOT initialized ❌)
+        console.log(b); // ❌ ReferenceError
+        let b = 20;
+        Why?
+        They are in Temporal Dead Zone (TDZ)
+        Cannot be accessed before declaration
+
+Hoisting allows variables or functions to be used before they are decleared in the code
+
+28- Currying in js?
+Currying in JavaScript is a technique where a function with multiple arguments is transformed into a sequence of functions, each taking one argument at a time.
+example===========>
+    Instead of:
+    f(a, b, c)
+    Currying allows:
+    f(a)(b)(c)
+
+❌ Normal function==>
+    function add(a, b) {
+    return a + b;
+    }
+
+    add(2, 3); // 5
+
+✅ Curried version
+    function add(a) {
+        return function (b) {
+            return a + b;
+        };
+    }
+
+    add(2)(3); // 5
+
+Using arrow functions======>
+    const add = a => b => a + b;
+    add(2)(3);
+    
+Currying with Multiple Arguments
+    const multiply = a => b => c => a * b * c;
+    multiply(2)(3)(4); // 24
+
+Why Currying is Useful (Interview Points)
+    Function Reusability
+        function add(a){
+            return function(b){
+                return a + b
+            }
+        }
+        const add10 = add(10);
+
+        add10(5); // 15
+        add10(20); // 30
+Real-World Example
+    const logger = level => message => {
+    console.log(`[${level}] ${message}`);
+    };
+
+    const errorLog = logger("ERROR");
+    errorLog("Something went wrong");
+
+29- Closures in js?
+
+30- What is prototype
+
+31- What is Redis and Disadvantage of redis?
+
+32- What is Redux?
+
+33- What is Callback?
+    Callback are function that are pass inside another function as an arrgument and that are executed after another function are executed
+
+34- Diff between Redux and context API and When to use context and Redux
+
+35- How to pass data from parent to child component without using state?
+
+36- What is populate in mongoose?
+
+37- What is Promisses?
+38- Diff between Promise.all() and Promise.allSettled()
+39- How to handle multiple concurrent request?
+40- What is left join, right join and inner join
+41- How to work $lookup
+42- How to handle Authentication and Authorization
+43- What is cors?
+44- What is proxy
+45- 
+46- What is typescript and how to defined Object
+47- Diff between git merge and git base and when to use git base
+48- How to identify which database should use (mongodb or mysql) 
+49- What is Inline tag and Display tag
+50- What is CDN?
+51- How js function are used for searching?
+52- How to use pagination in backend?
+53- What is key?
+54- What is metatype in 
+55- What is Box-model in css
+56- What is Semantic Elements?
+57- Diff between socket and websocket?
+58- What is webhooks?
+59- How to implement payment gateway
+60- Diff between Reducer and extraReducer
+61- What is builder in Redux
+62- Diff between state and Reducer
+63- what Load balancing
+64- What is Debouncing?
+    Debouncing is process to debounce action like preventing multiple api call at the same time, leading to better performance , and reduce the load time example search input
+
+65- What is throtling
+66- What is Rate limitiing
+67- pre and post middleware in mongodb
+    pre middleware are used before  mongodb operation 
+    like hashing password , validation, modified in input data 
+    post middleware used after mongodb operation
+    like send email or notification to users
+68- how to find user near 40 km
+69- Diff between var, let and const
+70- What is compound indexing
+71- what is hydration
+72- Server side rendering with real example
+73- Stream in node.js
+74- Diff between call, apply and bind
+75- Higher order function
+76- What is pure function in js?
+77- Higher order component ?
+78- Diff between useEffect() and uselayoutEffect()
+79- Diff between useMemo() and useCallback()
+80- What is the size of document?
+81- What is Replica sets and sharding
+82- If file size is 3 gb then how to save 
+83- What is cluster?
+84- What is the best approach to storing data in react?
+85- How to secure MERN application
+86- How to optimized mongodb query?
+    use indexing
+    use pagination
+    use projection
+    avoid over fetching
+    use aggregation pipeline when required
+    use lean()
+87- What is the best approach for secure nodejs application
+    use input validation
+    use JWT token for Authentication
+    Role based Authorization
+    secure Headers using helmet middleware
+    use HTTPS
+
+88- How to optimized React application?
+    memoization using useMemo() and useCallback()
+    code splitting
+    optimization Images and assets
+    lazy-loading
+    pagination
+
+89- How to authenticate react application?
+
+90- How to deployed typescript code at Server
+91- Diff between primary key and foreign key
+92- In mongodb what is lean() 
+93- what is _v ?
+94- Relationship in mongodb
+95- Diff between Promise.resolved() and process.nextTick()
+96- How lazy loading work?
+97- Diff between lazy-loading and cache
+98- What is OOPs concept?
+99- Query document
+100- How to scalling mongodb
+101- How ot handle millions of user request
+102- Diff between setImmediate() and process.nextTick()
+103- How to handle memory leak in node.js and react also how to identify memory leak in frontend?
+104- What is react fiber?
+105- What is deepcopy and shallow copies in js
+106- How to handle refresh token and access token
+107- I Have 5 request then how to handle it?
+108- const data = ['eat','tea','tan','ate','nat','bat']
+output will be [['eat','tea','ate'],['tan','nat'],['bat']]
+
+109- Diff between filter and map in js
+
+110- diff between slice in splice in js
+
+111- How do you handle error in node.js
+    use try and catch
+    use proper logs
+    use centerlized error handling middleware
+    use custome error classes
+
+112- What is middleware?
+A middleware in expressjs is a function that are used to handle http request , perform operation and pass control to the next middleware.
+
+113- Did you face challenges in production
+
+114- How to handle validtion in frontend and backend?
+    Fronted => install formik or yup, react-hook-form , custom form validation, required
+    backend => joi middleware, custom validators, express validators
+
+115- How to handle async operation without using await?
+    using .then and .catch with promise
+
+116- How to handle caching in frontend?
+
+117- How many types of Authentication?
+
+118- Can i replace useCallback() with useMemo()
+119- Diff between controll component and uncontroll component
+    controll component =>   form value are controll by react state
+                            re-rendering on state change
+    uncontroll component => form value are not control by react state so we need to use ref 
+                            less re-rendering since value are not directly tie to react state
+
+120- What do you mean by re-rendring?
+121- What is virtual dom?
+    Virtual DOM is light weight and copy of dom . re-render only changes parts.
+
+122- Diff between app.get() and app.use()
+In nodejs app.get() and app.use() both are used to handle request but app.get() are used to handles only http GET requests
+and app.use() handles all http methods (GET, POST, PUT. DELETE)  
+
+123- What is next()?
+    It is a callback function which is used to pass control to the next middleware function in the stack
+
+124- Diff between synchronus and asynchronous in node?
+
+125- How to handle unmounting phase in functional component with example
+126- Why to use custom hooks?
+127- 
+
+
+
+ 

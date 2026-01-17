@@ -1,0 +1,55 @@
+1- Diff between 'any' and 'unknown' in typescript
+any:- are used to disable type checking
+        let value: any;
+        value = 10;
+        value = "hello";
+        value = true;
+        value.toUpperCase();
+            When to Use any?
+                Migrating JS → TS
+                Third-party libraries without types
+                Temporary debugging
+
+    Note: Avoid 'any' in production
+unknown:- I don’t know the type yet, but I will check it before using it
+        let value: unknown;
+        value = 10;
+        value = "hello";
+        value.toUpperCase(); // ❌ Error
+        
+        You must check the type first:
+            if (typeof value === "string") {
+            value.toUpperCase(); // ✅ Safe
+            }
+
+        Real-World Example (API Response)
+        ❌ Using any
+            const response: any = fetchData();
+            console.log(response.user.name);
+        ✅ Using unknown
+            const response: unknown = fetchData();
+
+            if (
+            typeof response === "object" &&
+            response !== null &&
+            "user" in response
+            ) {
+            console.log((response as any).user.name);
+            }
+
+    When to Use unknown?
+        API responses
+        User input
+        Dynamic data
+        catch blocks (default in TS)
+            catch (err: unknown) {
+                if (err instanceof Error) {
+                    console.log(err.message);
+                }
+            }
+
+
+
+
+
+

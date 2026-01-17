@@ -302,20 +302,80 @@
 // }, 1000);
 
 // Program to check if a word is a palindrome
-function isPalindrome(word) {
-   const length = word.length;
-   // loop through half of the word
-   for (let i = 0; i < length / 2; i++) {   
-      // check if first and last characters are the same
-      if (word[i] !== word[length - 1 - i]) {
-         return 'This is not a palindrome';
-      }
-   }
-   return 'This is a palindrome';
-}
-// take input
-const inputWord = "hello";
+// function isPalindrome(word) {
+//    const length = word.length;
+//    // loop through half of the word
+//    for (let i = 0; i < length / 2; i++) {   
+//       // check if first and last characters are the same
+//       if (word[i] !== word[length - 1 - i]) {
+//          return 'This is not a palindrome';
+//       }
+//    }
+//    return 'This is a palindrome';
+// }
+// // take input
+// const inputWord = "hello";
 
-// call the function
-const result = isPalindrome(inputWord);
-console.log(result);
+// // call the function
+// const result = isPalindrome(inputWord);
+// console.log(result);
+
+//Q.25 
+// const data = ['eat','tea','tan','ate','nat','bat']
+//output will be = [['eat','tea','ate'],['tan','nat'],['bat']]
+
+// for(let i = 0 ; i < data.length; i++){
+//   console.log(data[i])
+// }
+
+//Q.26
+// const arr = [1,5,9,1,5,6,1]
+
+// Output:
+// {
+// 1:3,
+// 5:2,
+// 9:1,
+// 6:1
+// }
+
+//Q.27
+// const arr = [1,2,3,4,5]
+// output = [120,60,40,30,24]
+
+//Q.28
+// const arr = [2,7,11,15]
+// target = 9
+// output = [0,1]
+
+//Q.29
+// const arr = [1,2,3,4,5,6,7,8,9,10]
+// target = 15
+// output = [[5,10],[6,9],[7,8]]
+
+//Q.30
+// const arr = [1,2,3,4,5,6,7,8,9,10]
+// target = 12
+// output = [[3,9],[4,8],[5,7]]
+
+//Q.31
+// const arr = [1,2,3,4,5,6,7,8,9,10]
+// target = 20
+// output = []
+
+//Q.32
+// const arr = [1,2,3,4,5,6,7,8,9,10]
+// target = 18
+// output = [[9,9],[8,10]]
+
+//Q.33
+// const arr = [1,2,3,4,5,6,7,8,9,10]
+// target = 5
+// output = [[1,4],[2,3]]
+
+//Q.34
+// const arr = [1,2,3,4,5,6,7,8,9,10]
+// target = 8
+// output = [[1,7],[2,6],[3,5]]
+
+//Q.35

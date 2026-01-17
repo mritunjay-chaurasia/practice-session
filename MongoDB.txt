@@ -1,14 +1,15 @@
 1-  Index in MongoDB?
 Indexes improve query performance by allowing MongoDB to quickly find documents instead of scanning the entire collection.
 An index in mongodb is a data structures that improves the speed of data fetching operations on a collection. You can create an index using the createIndex method.
-db.collection.createIndex({name:1}) 
+db.collection.createIndex({name:1}) usind in DB scripts or mongoshell
+userSchema.index({name:1}) using in code 
 
 2- Perform data import and export in mongodb
 you can use mongoimport and mongoexport tools. using this tool we can import data from JSON , csv or TSV file into mongodb
 
-3- Aggregation Framework in MongoDB
-Aggregation framework is a powerful tool for performing , data processing and transformation on documents within a collection.This framework is particularly useful for creating complex data transformations
-such as filtering, grouping, sorting, reshaping and computing aggregations.
+3- Aggregation in MongoDB
+Aggregation in MongoDB is used to process data, transform it, and return computed results
+(similar to GROUP BY, JOIN, SUM in SQL).
 
 Aggregation operations in mongodb are performed using aggregate method.
 db.sale.aggregate([
@@ -17,8 +18,45 @@ db.sale.aggregate([
     {$sort:{totalSales:-1}}
 ])
 
-4- How to Handle Transactions in MongoDB?
-MongoDB supports multi-document ACID transactions by allowing us to perform a series of read and write operations across multiple documents and collections in a transaction. This ensures data consistency and integrity. To use transactions we typically start a session, begin a transaction, perform the operations and then commit or abort the transaction.
+4- Transactions in MongoDB?
+A transaction in mongodb allow you to execute multiple operation as a single atomic unit.
+Either all operation sucessfully succeed or all fails(roll back)
+Transactions used for update  multiple collection.
+example: Transfer money, order+ inventory update, user+ wallet update
+Basic transaction flow 
+Start Session
+→ Start Transaction
+→ Perform Operations
+→ Commit / Abort
+→ End Session
+
+Example: Transfer Money
+const session = db.getMongo().startSession();
+session.startTransaction();
+
+try {
+  const users = session.getDatabase("test").users;
+
+  users.updateOne(
+    { name: "A" },
+    { $inc: { balance: -100 } },
+    { session }
+  );
+
+  users.updateOne(
+    { name: "B" },
+    { $inc: { balance: 100 } },
+    { session }
+  );
+
+  session.commitTransaction();
+} catch (e) {
+  session.abortTransaction();
+} finally {
+  session.endSession();
+}
+
+
 
 5- What is MongoDB and how is it different from SQL databases?
 Mongodb is NoSQL , document based database , stores data in binary json format.
@@ -44,19 +82,8 @@ db.orders.aggregate([
     }
   }
 ])
-4
-9- How do you handle transactions in MongoDB?
-MongoDB supports ACID transactions on replica sets and sharded clusters.
-const session = await mongoose.startSession();
-session.startTransaction();
-try {
-  await User.updateOne({ _id: id }, { $inc: { balance: -100 } }, { session });
-  await Order.create([{ userId: id, amount: 100 }], { session });
-  await session.commitTransaction();
-} catch (err) {
-  await session.abortTransaction();
-}
-session.endSession();
+
+9- 
 
 10- Pre and Post Hooks (Middleware) in MongoDB
 They allow you to run custom logic before or after certain database operations — like save, find, update, or delete.
@@ -84,3 +111,43 @@ db.users.find({
 
 Coordinates must be in [longitude, latitude] order (not latitude first).
 type must be "Point".
+
+13- Optimize MongoDB queries:-
+  a- Proper indexing
+  b- avoid over-fetching
+  c- use pagination
+  d- use projection 
+  e- use aggregation pipelines when required
+
+14- MongoDB vs PostgreSQL – when do you use which?
+  I choose based on data structures and consistency requirements.
+
+15- How do you handle relationships in MongoDB?
+  a- Embedding for tightly coupled data
+  b- Referencing using ObjectId for reusable data
+
+16- 🔴 Redis vs 🟢 MongoDB
+  What is Redis?
+    Redis is an in-memory-data store mainly used for caching , fast access and temporary data.
+    Stores data in RAM
+    Extremely fast (microseconds)
+    Data is usually temporary
+    Support key-value, list , sets
+    Typical use cases:
+      Caching API responses
+      Session storage
+      Rate limiting
+      Real-time counters
+
+        
+  What is MongoDB?
+  MongoDB is a NoSQL document database used for persistent application data.
+    Stores data on disk
+    Data is permanent
+    Schema-flexible (JSON-like documents)
+    Supports indexing, aggregation, transactions
+  Typical use cases:
+    User data
+    Orders & payments
+    Product catalogs
+    Logs & analytics

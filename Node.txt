@@ -103,27 +103,13 @@
     require	Import modules (CJS)
     module	Info about current module
 
-13- How does the Node.js event loop work?
-    Node.js is single-threaded (only one main thread runs JavaScript).
-    But it is non-blocking thanks to the event loop.
-    The event loop allows Node.js to handle asynchronous operations (like file I/O, network requests, timers) without blocking the main thread.
-    Event Loop Workflow:
-    The event loop runs in phases. Each phase has a queue of callbacks to execute.
-    a. Timers Phase
-        Executes callbacks scheduled by:
-        setTimeout()
-        setInterval()
-    b. Pending Callbacks Phase
-        Executes I/O callbacks deferred from the previous loop.
-    c. Poll Phase
-        Important phase where:
-        Node waits for incoming I/O events (network, file system).
-        Executes their callbacks immediately if available.
-        If nothing is pending, it may block here.
-    d. Check Phase
-        Executes callbacks from setImmediate().
-    e. Close Callbacks Phase
-        Executes close event callbacks (like socket.on("close", ...)).
+13- What is the Node.js event loop?
+    The event loop allows Node.js to handle non-blocking asynchronous operations using a single thread.
+    It processes:
+    Timers
+    I/O callbacks
+    Promises (microtasks)
+    This is why Node.js is efficient for I/O-heavy backend systems.
 
 14- What is non-blocking I/O in Node.js?
         Non-blocking I/O in Node.js means operations don’t stop program execution while waiting for results — instead, they use callbacks, promises, or async/await so Node can continue doing other work.
@@ -267,8 +253,7 @@ To overcome this situation, we use promises.
 33- passport module in NodeJS?
     This middleware is used for implementing authentication and authorization in Express applications.
 
-34- Redis module.
-    Redis is an Open Source store for storing data structures.It can store data structures as a strings, hashes, indexes,stream.It is very usefull for reducing cache size.
+34- 
 
 35-  web socket: High level protocol 
     WebSockets are used for real-time web application like chat apps, live notifications, online games, dashboard etc.
@@ -289,5 +274,17 @@ a- Forword proxy- used by clients to access the internet securely
 b- Reverse proxy- used by servers, to handle client request before they reach backend service
 c- Transparent proxy- Used by organizations to monitor or control to internet usage
 
-38- 
+38- What is a Cron Job in Node.js?
+    A cron job is a scheduled task that runs automatically at specific times or intervals (for example: every day at midnight, every 5 minutes, every Sunday, etc.).
+
+    In Node.js, cron jobs are commonly used for background tasks that should run without user interaction.
+    cron jobs are used for:
+        Sending scheduled emails or notifications
+        Cleaning old or expired data
+        Generating daily/weekly reports
+        Updating payment status (Stripe reconciliation)
+        Auto-logout inactive users
+        Clearing Redis cache periodically
+
+
 

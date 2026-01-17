@@ -1,9 +1,11 @@
-1- How do you secure REST APIs built with Express.js?
-    Use JWT authentication.
-    Sanitize inputs to prevent injection attacks.
-    Use Helmet and CORS properly.
-    Apply rate limiting.
-    Validate data using Joi or Zod.
+1- How do you secure backend APIs?
+    a- JWT authentication
+    b- input validation
+    c- role-based authorization
+    d- rate limiting
+    e- secure headers
+    f- HTTPS
+    g- middleware base validation using libraries like Joi or express-validator
 
 2. Explain how middleware works in Express.js.
     Middleware are a function that runs between the client request and the server response.
@@ -110,8 +112,20 @@ Rate limiting is a technique, used to control the number of request a client
 Now each IP can only send 100 requests per 15 minutes.
 After exceeding that, the server automatically responds with 429 Too Many Requests
 
+13- Diff between REST api and GraphQL
+REST api have multiple endpoint and GraphQL have single endpoint.
 
+14- How do you handle large files or many uploads?
+    Chunk uploads
+    Background processing
+    Limit file size
+    Parallel upload control
+    Stream files instead of buffering
 
-
+15- How do you handle errors globally?
+    a- proper logging
+    b- central error middleware
+    c- custom error classes
+    d- proper HTTP status code
 
 
