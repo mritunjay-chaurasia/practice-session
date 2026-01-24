@@ -286,5 +286,11 @@ c- Transparent proxy- Used by organizations to monitor or control to internet us
         Auto-logout inactive users
         Clearing Redis cache periodically
 
+39- What is backpressure?
+    When data is produced faster than it can be consumed.
+    Node streams handle it via:
+        stream.pipe(dest);
+
+
 
 

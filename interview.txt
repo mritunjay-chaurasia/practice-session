@@ -33,12 +33,12 @@
     Absolute looks for nearest parent with position:relative  
 
 7- What is event-loop?
-Event-loop is mechanisum in nodejs that are used to handle none-blocking , asynchronus operation using a single-threaded of nodejs.
-Event loop are used to handle thousands of million request 
+    Event-loop is mechanisum in nodejs that are used to handle none-blocking , asynchronus operation using a single-threaded of nodejs.
+    Event loop are used to handle thousands of million request 
 
 8- Diff between node and express
-Nodejs => Nodejs is a single threaded run time environment that allow javascript to run on server using the V8 engine.
-Express.js is a lightweight web framework built on top of Node.js that simplifies building APIs and web applications.
+    Nodejs => Nodejs is a single threaded run time environment that allow javascript to run on server using the V8 engine.
+    Express.js is a lightweight web framework built on top of Node.js that simplifies building APIs and web applications.
 
 9- Diff between SSR and CSR?
     SSR (Server-Side Rendering) means HTML is generated on the server for every request and sent to the browser as a fully rendered page.
@@ -96,7 +96,6 @@ Express.js is a lightweight web framework built on top of Node.js that simplifie
         const timer = setInterval(()=>{
             console.log()
         },1000)
-
         return () =>{
             clearInterval(timer)
         }
@@ -145,17 +144,16 @@ Convert file → Base64 string
 Save inside MongoDB document
 
 21- Diff between Mysql, Postgresql and NoSql
-    | Feature      | MySQL            | PostgreSQL                | NoSQL                   |
-    | ------------ | ---------------- | ------------------------- | ----------------------- |
-    | Type         | Relational (SQL) | Relational (Advanced SQL) | Non-Relational          |
-    | Schema       | Fixed            | Fixed (very strict)       | Flexible / Dynamic      |
-    | ACID         | Yes              | Yes (very strong)         | Varies (often eventual) |
-    | Joins        | Yes              | Yes (powerful)            | Limited / No            |
-    | Transactions | Yes              | Advanced                  | Limited                 |
-    | JSON Support | Limited          | Excellent (JSONB)         | Native                  |
-    | Scalability  | Vertical         | Vertical + Horizontal     | Horizontal (easy)       |
-    | Performance  | Fast for reads   | Best for complex queries  | High for big data       |
-    | Use Case     | Simple apps      | Complex systems           | Big data / real-time    |
+|                 | MySQL            | PostgreSQL                | NoSQL 
+| Type            | Relational (SQL) | Relational (Advanced SQL) | Non-Relational   
+| Schema          | Fixed            | Fixed (very strict)       | Flexible 
+| ACID            | Yes              | Yes (very strong)         | 
+| Joins           | Yes              | Yes (powerful)            | Limited/No
+| Transactions    | Yes              | Advanced                  | Limited
+| JSON Support    | Limited          | Excellent (JSONB)         | Native
+| Scalability     | Vertical         | Vertical + Horizontal     | Horizontal (easy)
+| Performance     | Fast for reads   | Best for complex queries  | High for big data
+| Use Case        | Simple apps      | Complex systems           | Big data / real-time
 
     Use MySQL When:
     ✅ Simple CRUD apps
@@ -297,11 +295,45 @@ Real-World Example
     errorLog("Something went wrong");
 
 29- Closures in js?
+    A closure is created when a function remembers and can access variables from its outer (lexical) scope, even after the outer function has finished executing.
+    function outer() {
+        let count = 0;
+
+        function inner() {
+            count++;
+            console.log(count);
+        }
+
+        return inner;
+    }
+
+    outer()
+    example:-
+        for (var i = 0; i < 3; i++) {
+        setTimeout(() => console.log(i), 1000);
+        }
+        // Output: 3 3 3
+
+        for (var i = 0; i < 3; i++) {
+        (function (i) {
+            setTimeout(() => console.log(i), 1000);
+        })(i);
+        }
+        // Output: 0 1 2
+
+
 
 30- What is prototype
+    Prototype is a mechanism in JavaScript that allows objects to inherit properties and methods from another object
+    👉 Why use prototype?
+    Methods are shared, not recreated for every object.
+    👉 When to use prototype?
+    Memory optimization
+    Shared behavior
+    Object inheritance
+    Framework internals (React, Angular, Vue)
 
 31- What is Redis and Disadvantage of redis?
-
 32- What is Redux?
 
 33- What is Callback?
@@ -372,7 +404,7 @@ Real-World Example
     use indexing
     use pagination
     use projection
-    avoid over fetching
+    avoid ove    whithour react fiber UI could freeze during heavy updatesr fetching
     use aggregation pipeline when required
     use lean()
 87- What is the best approach for secure nodejs application
@@ -396,16 +428,65 @@ Real-World Example
 92- In mongodb what is lean() 
 93- what is _v ?
 94- Relationship in mongodb
-95- Diff between Promise.resolved() and process.nextTick()
+95- process.nextTick vs Promise
+    process.nextTick(()=> console.log('tick))
+    Promise.resolved().then(()=> console.log('promise))
+    output: tick
+            promise
+
+    nextTick has high priority
+
 96- How lazy loading work?
 97- Diff between lazy-loading and cache
 98- What is OOPs concept?
 99- Query document
 100- How to scalling mongodb
-101- How ot handle millions of user request
-102- Diff between setImmediate() and process.nextTick()
+
+101- How does Node handle millions of requests?
+    Event loop (non-blocking I/O)
+    Callback queue
+    Thread pool for blocking tasks
+    No thread per request (unlike Java)
+
+102- setTimeout(0) vs setImmediate
+    setTimeout  runs in timers phase
+    setImmediate runs in check phase
+
+    Inside I/O callback:
+    ➡️ setImmediate runs first
+
+    setTimeout(()=>{console.log('timeout')},0)
+    setImmediate(()=>{console.log('immediate')})
+
+
 103- How to handle memory leak in node.js and react also how to identify memory leak in frontend?
+    a-WebSocket / Subscription Cleanup
+        ❌ Leak
+        useEffect(() => {
+            socket.on("message", handler);
+        }, []);
+        ✅ Fix
+        useEffect(() => {
+            socket.on("message", handler);
+            return () => socket.off("message", handler);
+        }, []);
+    b- Remove Event Listeners
+        ❌ Leak
+        useEffect(() => {
+        window.addEventListener("resize", onResize);
+        }, []);
+        ✅ Fix
+        useEffect(() => {
+        window.addEventListener("resize", onResize);
+        return () => {
+            window.removeEventListener("resize", onResize);
+        };
+        }, []);
+
 104- What is react fiber?
+    React Fiber is React’s internal reconciliation engine (introduced in React 16) that controls how React updates the UI efficiently.
+    whithout react fiber UI could freeze during heavy updates
+
 105- What is deepcopy and shallow copies in js
 106- How to handle refresh token and access token
 107- I Have 5 request then how to handle it?
@@ -460,7 +541,108 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)
 
 125- How to handle unmounting phase in functional component with example
 126- Why to use custom hooks?
-127- 
+
+127- How to debug memory leaks?.
+    👉 --inspect
+    👉 heapdump
+    👉 Chrome DevTools
+    👉 process.memoryUsage()
+
+    Common causes:
+        Global variables
+        Event listeners not removed
+        Unreleased timers (setInterval)
+        Large objects kept in memory
+        Caching without eviction
+        Promises never resolved
+        Closures holding large objects
+        Growing arrays / maps
+
+128- What is the limit memory or nodejs and how to improve it.
+
+129- Diff between buffer and streams
+    A Buffer is a temporary memory space used to hold binary data.
+        Buffer → Stores entire data in memory at once
+        Stream → Processes data chunk by chunk
+    A Stream is used to handle large data efficiently by splitting it into chunks.
+
+130- what is Iteration of the Event Loop
+131- How to handle concurrent re-rendring?
+    Concurrent re-rendering in React is handled using Fiber, priority-based updates, and features like useTransition, Suspense, automatic batching, and memoization to keep the UI responsive.
+
+132- Difference between JOIN and UNION in PostgreSQL
+    JOIN are used to multiple table combine horizontally based on a related column.
+    Types of JOIN
+        INNER JOIN
+        LEFT JOIN
+        RIGHT JOIN
+        FULL JOIN
+        CROSS JOIN
+    UNION:Multiple SELECT queries ke results ko vertically combine karta hai
+133- Diff between type and Interface in typescript
+    interface → Used to define object shapes / contracts
+        interface User {
+            id: number;
+            name: string;
+        }
+    type → Used to create type aliases
+        type User = {
+            id: number;
+            name: string;
+        };
+
+
+134- Diff between delete and truncate
+    SQL databases like PostgreSQL.
+        DELETE:
+                Delete data from row by row
+                roll back are possible
+                WHERE clause are supported
+                DELETE FROM users WHERE status = 'inactive';
+        TRUNCATE:
+                Deletes data from  all row at once 
+                speed is very fast
+                DELETE FROM users
+    MongoDB (NoSQL)
+    TRUNCATE does not exist                
+        db.users.deleteMany({})      // similar to DELETE
+        db.users.drop()              // similar to TRUNCATE
+135- require vs import
+    | require      | import       |
+    | ------------ | ------------ |
+    | CommonJS     | ES Modules   |
+    | Dynamic      | Static       |
+    | Node default | Modern JS    |
+    | Synchronous  | Asynchronous |
+
+136- Can Node do multithreading?
+    👉 Yes, via:
+        Worker Threads
+        Cluster module 
+
+137- Why callbacks were replaced by promises?
+    Callback hell
+    Poor error handling
+    Hard to compose
+
+137- Cluster vs Worker Threads
+    Cluster:
+        Multiple processes
+        Share port
+        Good for scaling
+    Worker Threads:
+        Multiple threads
+        Share memory
+        Good for CPU tasks
+
+138- What happens if a blocking operation runs in Node?
+    while (true) {}
+    ❌ Entire server freezes
+    Why?
+    Event loop is blocked
+    No request can be processed
+
+
 
 
 

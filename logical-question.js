@@ -322,11 +322,20 @@
 
 //Q.25 
 // const data = ['eat','tea','tan','ate','nat','bat']
-//output will be = [['eat','tea','ate'],['tan','nat'],['bat']]
+// //output will be = [['eat','tea','ate'],['tan','nat'],['bat']]
 
-// for(let i = 0 ; i < data.length; i++){
-//   console.log(data[i])
+// function groupAnagrams(strs) {
+//   const anagrams = {}
+//     for(const str of strs){
+//         const key = str.split('').sort().join('')
+//         if(!anagrams[key]){
+//             anagrams[key] = []
+//         }
+//         anagrams[key].push(str)
+//     }
+//     return Object.values(anagrams)
 // }
+// groupAnagrams(data)
 
 //Q.26
 // const arr = [1,5,9,1,5,6,1]
@@ -338,6 +347,12 @@
 // 9:1,
 // 6:1
 // }
+
+// let result = {}
+// for(let i = 0; i < arr.length ; i++){
+//   result[arr[i]] = (result[arr[i]] || 0) + 1
+// }
+// console.log(result)
 
 //Q.27
 // const arr = [1,2,3,4,5]
