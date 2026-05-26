@@ -43,7 +43,7 @@ useLayoutEffect => blocks rendering until executed.
     f- Use async/await with proper error handing in node/express   
 
 20- What’s the difference between componentDidMount and useEffect in React?
-componentDidMount is a lifecycle method used in class components, while useEffect is a hook for function components that can handle mounting, updating, and cleanup
+componentDidMount is used in class components, while useEffect is a hook for function components that can handle mounting, updating, and cleanup
 
 21- How do you handle state management in React?
 Local state: useState or useReducer

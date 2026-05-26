@@ -41,20 +41,13 @@
     Express.js is a lightweight web framework built on top of Node.js that simplifies building APIs and web applications.
 
 9- Diff between SSR and CSR?
-    SSR (Server-Side Rendering) means HTML is generated on the server for every request and sent to the browser as a fully rendered page.
-    CSR (Client-Side Rendering) means the browser renders the page using JavaScript after loading a minimal HTML file.
-    
-    When to Use SSR?
-        Blogs
-        E-commerce
-        Marketing pages
-        SEO-driven content
+| SSR                 | CSR                 |
+| ------------------- | ------------------- |
+| Rendered on server  | Rendered in browser |
+| Better SEO          | Poor SEO            |
+| Faster initial load | Slower initial load |
+| More server load    | Less server load    |
 
-    When to Use CSR?
-        Dashboards
-        Admin panels
-        Authenticated apps
-        Heavy user interaction
 
 10- Diff betweenn redis and mongodb
     Redis
@@ -130,9 +123,13 @@ How Indexing Works (Concept)
     Hooks are special functions introduced in React 16.8 that allow you to use state and other React features in functional components, without writing class components.
 
 18- Diff between React and Nextjs
-    React is a JavaScript library used to build user interfaces, mainly client-side rendered (CSR) applications.
-    Next.js
-    Next.js is a React framework that adds server-side rendering, routing, and backend capabilities on top of React.
+| React.js                | Next.js              |
+| ----------------------- | -------------------- |
+| Frontend library        | React framework      |
+| Client-side rendering   | Supports SSR & SSG   |
+| Manual routing          | File-based routing   |
+| SEO is limited          | Better SEO           |
+| Separate backend needed | API routes supported |
 
 19- How to handle asynchronus operation without using Async/await in backend?
 Asynchronous operations can be handled without async/await using callbacks, Promises with then/catch,
@@ -173,14 +170,13 @@ Save inside MongoDB document
     ✅ Distributed systems
 
 
-22- How to google singup
-    User clicks “Sign in with Google”
-    Google authenticates the user
-    Google returns an ID token
-    Backend verifies token with Google
-    Backend creates/fetches user
-    Backend returns JWT / session
-    User is logged in
+22- How did you implement social authentication?
+    I implemented OAuth login using Google, Facebook, and Twitter/X.
+    Flow:
+        User authenticates via provider
+        Provider returns access token/user data
+        Backend verifies user
+        JWT token generated for session management
 
 23- Why to use interceptor?
     Interceptors allow us to modify, handle, or log requests and responses globally before they are sent or received.    Every request must pass through it
@@ -189,7 +185,7 @@ Save inside MongoDB document
         Performance monitoring
         Token Refresh Flow
 
-24- Diff between Object.key(), Object.vale(), Object.entries()
+24- Diff between Object.key(), Object.value(), Object.entries()
     Object.value() => returns an array of value
     Object.keys() => returns an array of keys
     Object.entries() => returns an array of key and value
@@ -333,50 +329,156 @@ Real-World Example
     Object inheritance
     Framework internals (React, Angular, Vue)
 
-31- What is Redis and Disadvantage of redis?
+31- What is Redis?
+    Redis (Remote Dictionary Server) is an in-memory NoSQL(key-value) database used mainly for:
+    Caching
+    Session management
+    Real-time applications
+    Pub/Sub messaging
+    Queue handling
+
+    Redis supports:
+        String
+        List
+        Set
+        Hash
+        Sorted Set
+    It stores data in RAM instead of disk, which makes it extremely fast.
+
 32- What is Redux?
+    Redux is a state management library used to manage global application data in React applications. It stores application state in a centralized store, making data sharing and state updates predictable and easier to manage.
+    Redux mainly has:
+        Store
+        Action
+        Reducer
+        Dispatch
+
+    Use Redux when:
+        Large application
+        Multiple shared states
+        Complex state logic
+        Real-time data handling
+    Avoid Redux when:
+        Small project
+        Simple state management
 
 33- What is Callback?
     Callback are function that are pass inside another function as an arrgument and that are executed after another function are executed
 
 34- Diff between Redux and context API and When to use context and Redux
+| Redux                 | Context API           |
+| --------------------- | --------------------- |
+| Better for large apps | Better for small apps |
+| Powerful debugging    | Simple setup          |
+| Middleware support    | Limited features      |
+| More scalable         | Less scalable         |
 
 35- How to pass data from parent to child component without using state?
+    We can pass data from a parent component to a child component using props. Props are read-only values passed from parent to child components.
+    | Props                  | State                    |
+    | ---------------------- | ------------------------ |
+    | Passed from parent     | Managed inside component |
+    | Read-only              | Mutable                  |
+    | Used for communication | Used for dynamic data    |
+
 
 36- What is populate in mongoose?
+    Mongoose populate() is used to replace a referenced document ID with the actual document data from another collection.
+
+    It works similarly to a JOIN operation in SQL databases.
+
 
 37- What is Promisses?
-38- Diff between Promise.all() and Promise.allSettled()
+    JavaScript Promise is an object that represents the future result of an asynchronous operation.
+    A Promise has 3 states:
+        1. Pending
+        Operation is still running.
+        2. Fulfilled
+        Operation completed successfully.
+        3. Rejected
+        Operation failed.
+
+38- Diff between Promise.all(), Promise.race() and Promise.allSettled()
+    Promise.all()
+        Runs multiple promises together.
+        Promise.all([promise1, promise2])
+        If one fails → entire promise fails.
+
+    Promise.race()
+        Returns the first completed promise.
+        Promise.race([promise1, promise2])
+
+    Promise.allSettled()
+        Promise.allSettled([promise1, promise2])
+        Returns the both Fulfilled and Rejected Promisses.
+
 39- How to handle multiple concurrent request?
-40- What is left join, right join and inner join
+    Node.js handles multiple concurrent requests using its:
+    Event-driven architecture
+    Non-blocking I/O
+    Event Loop
+
+40- What are LEFT JOIN, RIGHT JOIN, and INNER JOIN?
+    These are SQL joins used to combine data from multiple tables in databases like PostgreSQL and MySQL.
+    a. INNER JOIN
+    Returns only matching records from both tables.
+    b. LEFT JOIN
+    Returns:
+    All records from LEFT table
+    Matching records from RIGHT table
+    If no match exists → NULL values returned.
+    c. RIGHT JOIN
+    Returns:
+    All records from RIGHT table
+    Matching records from LEFT table
+    If no match exists → NULL values returned.
+
 41- How to work $lookup
 42- How to handle Authentication and Authorization
+    Authentication verifies who the user is
+    Authorization verifies what the user can access
 43- What is cors?
 44- What is proxy
 45- 
 46- What is typescript and how to defined Object
 47- Diff between git merge and git base and when to use git base
 48- How to identify which database should use (mongodb or mysql) 
-49- What is Inline tag and Display tag
+49- 
 50- What is CDN?
 51- How js function are used for searching?
 52- How to use pagination in backend?
 53- What is key?
-54- What is metatype in 
-55- What is Box-model in css
-56- What is Semantic Elements?
+54- How to event loop working?
+55- 
+56- 
 57- Diff between socket and websocket?
 58- What is webhooks?
+
 59- How to implement payment gateway
+    Frontend sends payment request
+    Backend creates payment intent
+    Stripe processes payment
+    Webhooks verify transaction status
+
 60- Diff between Reducer and extraReducer
 61- What is builder in Redux
 62- Diff between state and Reducer
+
 63- what Load balancing
+    Load balancing is a technique used to distribute incoming network traffic or requests across multiple servers.
+    Its main purpose is to:
+        Improve performance
+        Increase scalability
+        Prevent server overload
+        Ensure high availability
+
 64- What is Debouncing?
     Debouncing is process to debounce action like preventing multiple api call at the same time, leading to better performance , and reduce the load time example search input
 
-65- What is throtling
+65- What is throttling?
+    Controls execution rate over time.
 66- What is Rate limitiing
+    Rate limiting restricts the number of requests from users to prevent abuse and server overload.
 67- pre and post middleware in mongodb
     pre middleware are used before  mongodb operation 
     like hashing password , validation, modified in input data 
@@ -384,6 +486,11 @@ Real-World Example
     like send email or notification to users
 68- how to find user near 40 km
 69- Diff between var, let and const
+    var is global scope
+    var, let and const are function scope
+    let and const are block scope
+    const can not be reassigned
+
 70- What is compound indexing
 71- what is hydration
 72- Server side rendering with real example
@@ -398,15 +505,18 @@ Real-World Example
 81- What is Replica sets and sharding
 82- If file size is 3 gb then how to save 
 83- What is cluster?
+    In Node.js, clustering is a technique used to create multiple instances (processes) of a Node.js application to utilize multiple CPU cores.
+
 84- What is the best approach to storing data in react?
 85- How to secure MERN application
 86- How to optimized mongodb query?
     use indexing
     use pagination
     use projection
-    avoid ove    whithour react fiber UI could freeze during heavy updatesr fetching
     use aggregation pipeline when required
     use lean()
+    Reduce unnecessary API calls
+
 87- What is the best approach for secure nodejs application
     use input validation
     use JWT token for Authentication
@@ -414,12 +524,17 @@ Real-World Example
     secure Headers using helmet middleware
     use HTTPS
 
-88- How to optimized React application?
-    memoization using useMemo() and useCallback()
-    code splitting
-    optimization Images and assets
-    lazy-loading
-    pagination
+88- How do you optimize React applications?
+    I optimize React applications by:
+        Using lazy loading
+        Code splitting
+        Memoization
+        Pagination
+        Debouncing
+        Reducing unnecessary re-renders
+        Optimizing API calls
+    
+
 
 89- How to authenticate react application?
 
@@ -432,7 +547,7 @@ Real-World Example
     process.nextTick(()=> console.log('tick))
     Promise.resolved().then(()=> console.log('promise))
     output: tick
-            promise
+            promise Reduce unnecessary API calls
 
     nextTick has high priority
 
@@ -495,7 +610,7 @@ output will be [['eat','tea','ate'],['tan','nat'],['bat']]
 
 109- Diff between filter and map in js
 
-110- diff between slice in splice in js
+110- diff between slice and splice in js
 
 111- How do you handle error in node.js
     use try and catch
@@ -504,7 +619,11 @@ output will be [['eat','tea','ate'],['tan','nat'],['bat']]
     use custome error classes
 
 112- What is middleware?
-A middleware in expressjs is a function that are used to handle http request , perform operation and pass control to the next middleware.
+    Middleware functions execute between request and response.
+    Authentication
+    Logging
+    Error handling
+    Validation
 
 113- Did you face challenges in production
 
@@ -537,7 +656,8 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)
 123- What is next()?
     It is a callback function which is used to pass control to the next middleware function in the stack
 
-124- Diff between synchronus and asynchronous in node?
+124- Diff between synchronus
+and app.use() handles all http methods (GET, POST, PUT. DELETE)   and asynchronous in node?
 
 125- How to handle unmounting phase in functional component with example
 126- Why to use custom hooks?
@@ -641,6 +761,160 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)
     Why?
     Event loop is blocked
     No request can be processed
+
+139- what is the best approach to store jwt token in react
+we need to use HttpOnly Cookie Browser storage 
+Backend: Basic Express Setup
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+
+const app = express();
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // React / Next.js
+    credentials: true, // IMPORTANT
+  })
+);
+
+
+Login API → Set HttpOnly Cookie==============>>>>>
+
+    import jwt from "jsonwebtoken";
+
+    app.post("/login", (req, res) => {
+    const user = { id: 1, email: "test@mail.com" }; // validate user
+    const ACCESS_TOKEN_EXPIRE = 15 * 60;
+    const accessToken = jwt.sign(user, process.env.JWT_SECRET, {
+        expiresIn: "15m",
+    });
+
+    res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: ACCESS_TOKEN_EXPIRE * 1000,
+    });
+
+    res.json({ message: "Login successful" });
+    });
+
+Axios setup==================>>>>>>>>>>>>>
+    import axios from "axios";
+
+    const api = axios.create({
+    baseURL: "http://localhost:5000",
+    withCredentials: true, // 🔥 REQUIRED
+    });
+
+    export default api;
+Call API===============>
+    api.get("/profile");
+    Cookies are sent automatically
+
+Backend: Auth Middleware (Protected Routes)
+    const authMiddleware = (req, res, next) => {
+    const token = req.cookies.accessToken;
+
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (err) {
+        res.status(403).json({ message: "Invalid token" });
+    }
+    };
+
+Protected Route==========>>>>>>>
+    app.get("/profile", authMiddleware, (req, res) => {
+    res.json({ user: req.user });
+    });
+
+Logout (Clear Cookie)======>>>
+    app.post("/logout", (req, res) => {
+    res.clearCookie("accessToken", {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production",
+    });
+
+    res.json({ message: "Logged out" });
+    });
+
+Q1. Tell me about yourself.
+    Hi, my name is Mritunjay Chaurasia. I am a Full Stack Developer with around 4 years of experience specializing in the MERN stack and Next.js.
+
+    I have worked on healthcare and gaming platforms where I handled both frontend and backend development. My expertise includes React.js, Next.js, Node.js, Express.js, MongoDB, PostgreSQL, Redis, and TypeScript.
+
+    Currently, I am working at Pipasha Healthcare where I develop scalable healthcare applications, REST APIs, authentication systems, and responsive user interfaces.
+
+    Previously, I worked at RTE SOFTWARE LLP on multiple client projects involving Stripe payment integration, third-party APIs, and scalable web applications.
+
+    I enjoy solving real-world problems, optimizing performance, and building user-friendly applications.
+
+Q2. What are your main responsibilities in your current company?
+    My responsibilities include:
+        Developing frontend applications using React.js and Next.js
+        Building RESTful APIs using Node.js and Express.js
+        Managing MongoDB and PostgreSQL databases
+        Integrating third-party APIs
+        Implementing authentication systems
+        Debugging production issues
+        Optimizing performance and scalability
+        Collaborating with designers, QA teams, and stakeholders
+
+Q3. Why are you looking for a job change?
+    I am looking for better growth opportunities, challenging projects, and long-term career development where I can enhance my full stack development skills and contribute to scalable products.
+
+Q4. Explain your role in the Beek Health project.
+    In the Beek Health project, I worked as a Full Stack Developer using Next.js, Node.js, PostgreSQL, and Redis.
+
+    My responsibilities included:
+        Developing healthcare platform modules
+        Integrating Stripe payment gateway
+        Building lab test booking functionality
+        Managing RESTful APIs
+        Uploading and managing health reports
+        Optimizing backend performance using Redis caching
+        Integrating third-party healthcare APIs
+
+Q5. Explain the SlotBunny project.
+    SlotBunny is a gaming platform where I worked on scalable frontend and backend features using Next.js and Node.js.
+
+    I implemented:
+        Real-time multiplayer functionality using WebSocket
+        Redis for concurrent session management
+        Authentication systems
+        Third-party casino provider integrations
+        API performance optimization
+
+Q6. What are your strengths?
+    Problem-solving
+    Quick learning
+    Team collaboration
+    Debugging skills
+    Full stack development expertise
+
+Q7. What is your weakness?
+    Sometimes I spend extra time perfecting implementation details, but now I focus more on balancing quality with deadlines.
+
+Q8. Where do you see yourself in 5 years?
+    I see myself growing into a Senior Full Stack Developer or Technical Lead role, working on scalable applications and mentoring junior developers.
+
+Q9. Questions to ask interviewer
+    Examples:
+    What technologies does your team mainly use?
+    How is the development workflow managed?
+    What are the current challenges in the project?
+    Is there opportunity for learning and growth?
+
+
 
 
 

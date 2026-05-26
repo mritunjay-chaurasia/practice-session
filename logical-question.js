@@ -112,8 +112,8 @@
 //     for(let j = 1 ; j <= i; j++){
 //         sum += j
 //     }
-//     for(let j = 1 ; j <= i; j++){
-//         row += j + sum - i + " "
+//     for(let j = 1 ; j <= i - 1; j++){
+//         row += j + sum  + " "
 //     }
 //     console.log(row)
 // }
@@ -393,4 +393,73 @@
 // target = 8
 // output = [[1,7],[2,6],[3,5]]
 
-//Q.35
+//Q.35 find max and min in array
+// const arrNum = [2,5,6,1,6,4,8,4]
+
+//Q.36 find remove duplicate in array
+// const arrNum = [2,5,6,1,6,4,8,4]
+
+//Q.38 find duplicate in array
+// const arrNum = [2,5,6,1,6,4,8,4]
+// const duplicate = []
+// for(let i = 0 ; i < arrNum.length; i++){
+//    for( j = i+1; j < arrNum.length ; j++){
+//        if(arrNum[i] === arrNum[j] && !duplicate.includes(arrNum[j])){
+//         //   console.log(arrNum[j])
+//            duplicate.push(arrNum[j])
+//        }
+//    }
+// }
+
+// console.log(duplicate)
+
+//Q.39 "Hello World" to print dlroW olleH
+// const str = "Hello World"
+// console.log(str.split('').reverse().join(' '))
+// for(let i = str.length -1; i >= 0; i--){
+//     console.log(str[i])
+// }
+
+//Q.40 find second largest number in array
+// const arrNum = [2,5,6,1,6,4,8,4]
+// const res = arrNum.sort((a,b) => a - b)
+// or 
+// function customSort(arr) {
+//     const n = arr.length
+//     for(let i = 0; i < n -1; i++){
+//         for(let j = 0; j < n - i - 1; j++){
+//             if(arr[j] > arr[j+1]){
+//                 const temp = arr[j];
+//                 arr[j] = arr[j+1];
+//                 arr[j+1] = temp
+//             }
+//         }
+//     }
+//     return arr
+// }
+
+// const res = customSort(arrNum)
+// console.log(res[res.length - 2])
+
+//Q.41 find second smallest number in array
+    // const arrNum = [2,5,6,1,6,4,8,4]
+    // const arrLength = arrNum.length
+
+    // const res =  arrNum.sort((a,b)=> b - a)
+    // or
+    // function customNumberSort(arr) {
+    //     for(let i = 0 ; i < arrLength - 1; i++){
+    //         for(let j = 0 ; j < arrLength - i - 1; j++){
+    //             if(arr[j] < arr[ j+ 1]){
+    //                 const temp = arr[j]
+    //                 arr[j] = arr[j + 1]
+    //                 arr[j + 1] = temp
+    //             }
+    //         }
+    //     }
+    //     return arr
+    // }
+
+    // const res =customNumberSort(arrNum)
+    // console.log(res[arrLength - 2])
+

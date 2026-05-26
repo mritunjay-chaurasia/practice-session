@@ -1,6 +1,6 @@
 1- Diff between 'any' and 'unknown' in typescript
 any:- are used to disable type checking
-        let value: any;
+    let value: any;
         value = 10;
         value = "hello";
         value = true;

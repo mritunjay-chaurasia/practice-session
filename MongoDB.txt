@@ -151,3 +151,367 @@ type must be "Point".
     Orders & payments
     Product catalogs
     Logs & analytics
+
+//Q If you want to find the user who has the second highest total order amount in MongoDB using users and orders collections, you can use an aggregation query. Here's an example of how you can achieve this:
+
+// Assuming you have a users collection with fields like _id and name, and an orders collection with fields like userId and amount, you can use the following aggregation pipeline:
+
+db.users.insertMany([
+  {
+    _id:1,
+    name:'mritunjay'
+  },
+  {
+    _id:2,
+    name:"ram"
+  }
+  ])
+
+db.orders.insertMany([
+  {
+    _id:1,
+    userId:1,
+    amount:2000
+  },
+  {
+    _id:2,
+    userId:2,
+    amount:3000
+  }
+  ])
+
+// db.orders.aggregate([
+//   {
+//     $group: {
+//       _id: "$userId",
+//       totalAmount: { $sum: "$amount" }
+//     }
+//   },
+//   {
+//     $sort: { totalAmount: -1 }
+//   },
+//   {
+//     $skip: 1
+//   },
+//   {
+//     $limit: 1
+//   },
+//   {
+//     $lookup: {
+//       from: "users",
+//       localField: "_id",
+//       foreignField: "_id",
+//       as: "user"
+//     }
+//   }
+// ])
+
+// This aggregation pipeline does the following:
+// 1. Groups the orders by userId and calculates the total order amount for each user.
+// 2. Sorts the results in descending order based on totalAmount.
+// 3. Skips the first result (the user with the highest total amount).
+// 4. Limits the results to 1 to get only the second highest total amount.
+// 5. Performs a lookup to join the users collection to get the user's name.
+// 6. Unwinds the user array to get a single document for each user.
+// 7. Projects the desired fields, including userId, totalAmount, and userName.
+
+// This will return the user who has the second highest total order amount along with their name and total amount.  
+
+or
+
+db.orders.find().sort({amount:-1}).skip(1).limit(1)
+
+Q-Find Total Order Amount Per User
+db.orders.aggregate([
+  {
+    $group:{
+      _id:"$userId",
+      totalAmount:{
+        $sum:"$amount"
+      }
+    }
+  }
+])
+
+Q- Count Total Orders Per User
+
+db.orders.aggregate([
+  {
+    $group:{
+      _id:"$userId",
+      count:{
+        $sum:1
+      }
+    }
+  }
+])
+
+Q. Find Average Salary Department Wise
+  db.employees.aggregate([
+    {
+      $group: {
+        _id: "$department",
+        avgSalary: {
+          $avg: "$salary"
+        }
+      }
+    }
+  ])
+
+
+
+Q- Second smallest payment userDetails
+    db.payment.aggregate([
+      {
+        $group:{
+          _id:"$userId",
+          "totalPayment":{
+            $sum:"$payment"
+          }
+        }
+      },
+      {
+        $sort:{
+          totalPayment:1
+        }
+      },
+      {
+        $skip:1
+      },
+      {
+        $limit:1
+      },
+      {
+        $lookup:{
+          from:"employee",
+          localField:"_id",
+          foreignField:"_id",
+          as:"data"
+        }
+      }
+      ])
+
+Q- Find Duplicate Emails
+
+db.users.insertMany([
+  {
+    _id:1,
+    email:"mr@gmail.com"
+  },
+  {
+    _id:2,
+    email:"mr1@gmail.com"
+  },
+  {
+    _id:3,
+    email:"mr3@gmail.com"
+  },
+  {
+    _id:4,
+    email:"mr3@gmail.com"
+  }
+  ])
+  
+  db.users.aggregate([
+      {
+        $group:{
+          _id:'$email',
+          count:{
+            $sum:1
+          }
+        }
+      },
+      {
+        $match:{
+          count:{
+            $gt:1
+          }
+        }
+      }
+  ])
+
+Q- Find Users Who Have Not Placed Orders
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "userId",
+      as: "orders"
+    }
+  },
+  {
+    $match: {
+      orders: { $size: 0 }
+    }
+  }
+])
+
+6. Find Top 3 Highest Spending Users
+db.users.aggregate([
+  {
+    $group:{
+      _id:"$userId",
+      totalAmount:{
+        $sum:"$amount"
+      }
+    }
+  },
+  {
+    $sort:{
+      totalAmount:-1
+    }
+  },
+  {
+    $limit:3
+  }
+])
+
+Q. Find Products Never Ordered
+db.products.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "productId",
+      as: "orders"
+    }
+  },
+  {
+    $match: {
+      orders: { $size: 0 }
+    }
+  }
+])
+
+Q. Find Average Salary Department Wise
+db.employees.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      avgSalary: {
+        $avg: "$salary"
+      }
+    }
+  }
+])
+
+10. Find Employees Salary Greater Than Average Salary
+const avgSalary = db.employees.aggregate([
+  {
+    $group: {
+      _id: null,
+      avgSalary: { $avg: "$salary" }
+    }
+  }
+]).toArray()[0].avgSalary;
+
+db.employees.find({
+  salary: { $gt: avgSalary }
+})
+
+11. Find Latest Order of Each User
+db.orders.aggregate([
+  {
+    $sort: {
+      createdAt: -1
+    }
+  },
+  {
+    $group: {
+      _id: "$userId",
+      latestOrder: {
+        $first: "$$ROOT"
+      }
+    }
+  }
+])
+
+12. Find Monthly Sales Report
+db.orders.aggregate([
+  {
+    $group: {
+      _id: {
+        month: { $month: "$createdAt" },
+        year: { $year: "$createdAt" }
+      },
+      totalSales: {
+        $sum: "$amount"
+      }
+    }
+  }
+])
+
+13. Find Users Registered in Last 7 Days
+db.users.find({
+  createdAt: {
+    $gte: new Date(
+      new Date().setDate(new Date().getDate() - 7)
+    )
+  }
+})
+
+14. Find User With Maximum Orders
+db.orders.aggregate([
+  {
+    $group: {
+      _id: "$userId",
+      totalOrders: {
+        $sum: 1
+      }
+    }
+  },
+  {
+    $sort: {
+      totalOrders: -1
+    }
+  },
+  {
+    $limit: 1
+  }
+])
+
+15. Find Common Skills Between Users
+
+db.users.find({
+  skills: {
+    $in: ["Node.js"]
+  }
+})
+
+16. Find Documents Where Field Exists
+db.users.find({
+  phone: { $exists: true }
+})
+
+17. Remove Duplicate Records
+db.users.aggregate([
+  {
+    $group: {
+      _id: "$email",
+      ids: { $push: "$_id" },
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $match: {
+      count: { $gt: 1 }
+    }
+  }
+])
+
+18. Find Users Age Between 20 and 30
+db.users.find({
+  age: {
+    $gte: 20,
+    $lte: 30
+  }
+})
+
+19. Pagination Query
+db.users.find().skip(10).limit(10)
+
+20. Find Active Users Only
+db.users.find({
+  status: "active"
+})
