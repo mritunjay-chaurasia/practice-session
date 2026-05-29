@@ -8,8 +8,7 @@ userSchema.index({name:1}) using in code
 you can use mongoimport and mongoexport tools. using this tool we can import data from JSON , csv or TSV file into mongodb
 
 3- Aggregation in MongoDB
-Aggregation in MongoDB is used to process data, transform it, and return computed results
-(similar to GROUP BY, JOIN, SUM in SQL).
+Aggregation in MongoDB is a process used to perform data processing and analysis operations like filtering, grouping, sorting, and transforming documents through aggregation pipelines.
 
 Aggregation operations in mongodb are performed using aggregate method.
 db.sale.aggregate([

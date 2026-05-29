@@ -15,7 +15,27 @@ useLayoutEffect => blocks rendering until executed.
 
 11- useReducer => that are used for managed complex state logic and it is alternative of useState and is a function that take current state and action as an argument  and after proccessing  return new state. 
 
-12- extraReducer
+12- Explain createAsyncThunk and its action lifecycle.
+    createAsyncThunk wraps an async function and dispatches three actions automatically: .pending, .fulfilled, .rejected. You handle these in extraReducers to update loading flags, data, and errors.
+    export const fetchUser = createAsyncThunk(
+    'users/fetchById',
+    async (userId, thunkAPI) => {
+        const res = await api.getUser(userId);
+        return res.data;
+    }
+    );
+
+    createSlice({
+    name: 'users',
+    initialState: { data: null, status: 'idle' },
+    reducers: {},
+    extraReducers: builder => {
+        builder
+        .addCase(fetchUser.pending,   s => { s.status = 'loading'; })
+        .addCase(fetchUser.fulfilled, (s, a) => { s.status = 'succeeded'; s.data = a.payload; })
+        .addCase(fetchUser.rejected,  s => { s.status = 'failed'; });
+    }
+    });
 
 13- useRef => used for accessing DOM element, Storing mutable values, Managing focus
 
@@ -25,7 +45,8 @@ useLayoutEffect => blocks rendering until executed.
 
 16- React Suspense => React Suspense is a feature that allows you to handling asynchronus operation like data fetching or code splitting by showing fallback content while waiting a resource.
 
-17- Reconciliation => Reconciliation is the proccess , which are used to compare between new virtual dom with previous virtual dom and diffing to determine  and then update DOM effeciently
+17- What is reconciliation in React?
+ Reconciliation is the proccess , which are used to compare between new virtual dom with previous virtual dom and diffing to determine  and then updates the actual DOM efficiently.
 
 
 18- React.memo => React.memo is a HOC that memoizes function component and preventing it  re-rendring unless it prop changed 

@@ -94,19 +94,7 @@
         }
     },[])
 
-15- What is aggregation?
-    Aggregation in MongoDB is used to process data, transform it, and return computed results
-    Aggregation have multiple stage where each stage are:
-    take input document
-    perform operation
-    pass output to next stage
-
-    Aggregation operations in mongodb are performed using aggregate method.
-    db.sale.aggregate([
-        {$match:{status:"completed"}},
-        {$group:{_id:"$product",totalSales:{$sum:"$amount"}}},
-        {$sort:{totalSales:-1}}
-    ])
+15- 
 
 16- What is indexing?
 Indexing is a database technique that improves query performance by creating a lookup structure on fields so the database can retrieve records faster without scanning the entire dataset.
@@ -216,7 +204,8 @@ first();
 
 
 27- Hoisting in js?
-Hoisting is javascript behavior where variables or functions decreations are moved at the top of their scope during the compilation phase (before code execution)
+    Hoisting is JavaScript's default behavior where Variable or Function declarations are moved to the top of their scope before code execution.
+
     Hoisting Works (Conceptually)
     JavaScript engine:
         Allocates memory for variables & functions
@@ -230,13 +219,11 @@ Example:-
         var a;
         console.log(a);
         a = 10;
-    b- let and const (Hoisted but NOT initialized ❌)
+    b- let and const 
         console.log(b); // ❌ ReferenceError
         let b = 20;
-        Why?
-        They are in Temporal Dead Zone (TDZ)
-        Cannot be accessed before declaration
-
+        Result show : ReferenceError
+        Reason: let and const are hoisted but placed in Temporal Dead Zone (TDZ) until initialization.
 Hoisting allows variables or functions to be used before they are decleared in the code
 
 28- Currying in js?
@@ -434,23 +421,134 @@ Real-World Example
     If no match exists → NULL values returned.
 
 41- How to work $lookup
+db.user.aggregate([
+    {
+        $lookup:{
+            from:'user',
+            localfield:'_id',
+            foreignfield:"_id",
+            as:"User"
+        }
+    }
+])
 42- How to handle Authentication and Authorization
     Authentication verifies who the user is
     Authorization verifies what the user can access
-43- What is cors?
-44- What is proxy
-45- 
-46- What is typescript and how to defined Object
-47- Diff between git merge and git base and when to use git base
+
+43- What is CORS?
+    CORS stands for Cross-Origin Resource Sharing.
+    It is a browser security mechanism that controls whether a frontend application from one origin can access resources from another origin.
+    Frontend:http://localhost:3000
+    Backend:http://localhost:5000
+    If frontend tries: fetch("http://localhost:5000/api/users")
+    Browser blocks it because origins are different.
+    This is called: CORS Error
+
+44- Is CORS a backend issue or frontend issue?
+    CORS is enforced by the browser, but configured on the backend server.
+
+45- What is proxy?
+    A proxy acts as an intermediary between a client and a server.
+
+    Instead of the client directly communicating with the target server, the request first goes to the proxy server, and then the proxy forwards the request to the actual server.
+    Client → Proxy Server → Actual Server
+    Proxy can help avoid CORS issues by making requests appear as same-origin.
+
+46- What is typescript?
+    TypeScript is a superset of JavaScript developed by Microsoft that adds static typing, interfaces, and modern features on top of JavaScript.
+
+    TypeScript code is converted (compiled) into normal JavaScript before running in the browser or Node.js.
+
+47- Diff between git merge and git rebase
+    git merge combines two branches by creating a new merge commit.
+    git rebase moves commits from one branch on top of another branch.
+
 48- How to identify which database should use (mongodb or mysql) 
-49- 
+    Database selection depends on:
+        application requirements
+        data structure
+        scalability
+        relationships
+        consistency requirements
+        query patterns
+
+49- Does Postman show CORS errors?
+    No, because CORS is enforced only by browsers. Postman directly sends HTTP requests without browser security restrictions.
+
 50- What is CDN?
 51- How js function are used for searching?
+
 52- How to use pagination in backend?
-53- What is key?
-54- How to event loop working?
-55- 
-56- 
+db.user.find().skip(10).limit(10)
+
+53- Difference Between package.json and package-lock.json
+    package.json is the main configuration file of a Node.js project.
+    It contains:
+        Project information
+        Dependencies
+        Scripts
+        Version details
+    
+    package-lock.json stores the exact versions of installed dependencies and their sub-dependencies.
+
+54- What happens if package-lock.json is deleted?
+    If package-lock.json is deleted, the project can still run, but there can be dependency version issues.
+
+55- Diff between flex and Grid?
+| Flexbox                  | Grid                       |
+| ------------------------ | -------------------------- |
+| One-dimensional          | Two-dimensional            |
+| Row OR Column            | Row AND Column             |
+| Better for small layouts | Better for complex layouts |
+| Content-based layout     | Layout-based system        |
+
+56- What is Aggregator or Aggregation?
+    Aggregation in MongoDB is a process used to perform data processing and analysis operations like filtering, grouping, sorting, and transforming documents through aggregation pipelines.
+    | Stage      | Purpose          |
+    | ---------- | ---------------- |
+    | `$match`   | Filter documents |
+    | `$group`   | Group data       |
+    | `$sort`    | Sort results     |
+    | `$project` | Select fields    |
+    | `$lookup`  | Join collections |
+    | `$limit`   | Limit results    |
+    | `$skip`    | Pagination       |
+
+db.orders.aggregate([
+   {
+      $group: {
+         _id: "$status",
+         total: { $sum: 1 }
+      }
+   },
+   {
+    $match:{
+        total:{
+            $gte:1
+        }
+    }
+   },
+   {
+    $sort: {
+        price: -1
+        }
+    },
+   {
+    $project: {
+            name: 1,
+            email: 1
+        }
+    },
+    {
+   $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "userDetails"
+        }
+    }
+])
+
 57- Diff between socket and websocket?
 58- What is webhooks?
 
@@ -472,11 +570,28 @@ Real-World Example
         Prevent server overload
         Ensure high availability
 
-64- What is Debouncing?
-    Debouncing is process to debounce action like preventing multiple api call at the same time, leading to better performance , and reduce the load time example search input
+64- What is Debouncing and If debounce time is 1000ms and at 999ms user types again, will it call or wait again?
+Debouncing is a technique used to delay function execution until the user stops performing an action for a specified time.
+It is mainly used to improve performance and avoid unnecessary function calls.
 
-65- What is throttling?
-    Controls execution rate over time.
+The timer resets again.
+Function executes only after user stops typing for 1000ms.
+So it will wait another full 1000ms from the latest keystroke.
+
+In frontend applications, I used debouncing mainly for:
+    Search auto-suggestions
+    API optimization
+    Input validation
+    Reducing unnecessary API calls
+
+65- What is throttling with real example?
+    Throttling limits the execution of a function to once within a specified time interval, even if the event is triggered multiple times continuously.
+
+Most common use case.
+Example:
+    Good for scroll
+    Lazy loading
+
 66- What is Rate limitiing
     Rate limiting restricts the number of requests from users to prevent abuse and server overload.
 67- pre and post middleware in mongodb
@@ -484,7 +599,72 @@ Real-World Example
     like hashing password , validation, modified in input data 
     post middleware used after mongodb operation
     like send email or notification to users
-68- how to find user near 40 km
+
+68- Security Best Practices in Node.js
+a. Authentication & Authorization
+    Use:
+        JWT
+        OAuth
+        Role-based access
+b. Password Hashing
+    Never store plain passwords. Use bcrypt 
+c. Environment Variables
+    Store secrets in .env
+d. Input Validation
+    Validate all incoming data.
+    Use:
+        Joi
+        Zod
+        express-validator
+e. Helmet Middleware
+    const helmet = require('helmet');
+    app.use(helmet());
+    Helps secure HTTP headers.
+
+f. Rate Limiting
+    app.use(rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100
+    }));
+g. CORS Security
+    Use proper CORS configuration.
+    app.use(cors({
+    origin: "frontend url(https://localhost:3000)"
+    }));
+h. HTTPS
+    Always use HTTPS in production.
+i. Secure Cookies
+    use:
+        httpOnly: true
+        secure: true
+        sameSite: "strict"
+j. Limit Request Payload
+    Prevent large payload attacks.
+    app.use(express.json({
+    limit: "10kb"
+    }));
+k. Database Security
+    Restrict DB access
+    Use authentication
+    Enable backups
+    Use indexing properly
+l. Avoid Blocking Event Loop
+    Heavy CPU tasks can cause DoS issues.
+    Use:
+        Worker threads
+        Queues
+m. File Upload Security
+    Validate:
+        File type
+        File size
+n. Dependency Security
+    Regularly update packages.
+o. CSRF Protection
+    Use:
+    CSRF tokens
+    SameSite cookies
+    Especially for session-based apps.
+
 69- Diff between var, let and const
     var is global scope
     var, let and const are function scope
@@ -492,7 +672,12 @@ Real-World Example
     const can not be reassigned
 
 70- What is compound indexing
-71- what is hydration
+
+71- What is hydration and what's a "hydration mismatch"?
+    Hydration is the process where React takes server-rendered HTML and attaches event listeners and state to turn it into a functional SPA on the client.
+
+    A hydration mismatch happens when the server-rendered HTML and the client's first render differ — for example, using Date.now() or window.innerWidth during render. React can't reuse the server DOM, logs a warning, and falls back to re-rendering from scratch (losing the SSR benefit).
+
 72- Server side rendering with real example
 73- Stream in node.js
 74- Diff between call, apply and bind
@@ -551,7 +736,17 @@ Real-World Example
 
     nextTick has high priority
 
-96- How lazy loading work?
+96- Explain code splitting and React.lazy?
+Code splitting means breaking the bundle into smaller chunks loaded on demand, instead of shipping one giant bundle.js. React.lazy is the React-native way:
+
+const Dashboard = React.lazy(() => import('./Dashboard'));
+
+<Suspense fallback={<Spinner />}>
+  <Dashboard />
+</Suspense>
+
+Nested routes map to nested layouts via <Outlet />.
+
 97- Diff between lazy-loading and cache
 98- What is OOPs concept?
 99- Query document
@@ -660,7 +855,41 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)
 and app.use() handles all http methods (GET, POST, PUT. DELETE)   and asynchronous in node?
 
 125- How to handle unmounting phase in functional component with example
+    In functional components, unmounting is handled using the cleanup function inside useEffect.
+   In React, unmounting means:
+
+    When a component is removed from the DOM.
+
+    During unmounting, we usually:
+
+    clear timers
+    remove event listeners
+    cancel API calls
+    cleanup subscriptions
+
+    useEffect(() => {
+
+    // Mounting logic
+
+    return () => {
+        // Cleanup logic (Unmounting)
+    };
+
+    }, []);
+
 126- Why to use custom hooks?
+Custom hook name must start with: 'use'
+Reuse stateful logic between multiple components.
+Custom hooks are commonly used for:
+Authentication
+API calls
+Form handling
+Debouncing
+Pagination
+Infinite scroll
+Window resize
+Theme management
+Local storage
 
 127- How to debug memory leaks?.
     👉 --inspect
@@ -679,6 +908,8 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)   and asynchrono
         Growing arrays / maps
 
 128- What is the limit memory or nodejs and how to improve it.
+Memory usage can be improved using streams, pagination, optimized queries, proper cleanup, clustering, and avoiding memory leaks.
+
 
 129- Diff between buffer and streams
     A Buffer is a temporary memory space used to hold binary data.
@@ -700,16 +931,25 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)   and asynchrono
         CROSS JOIN
     UNION:Multiple SELECT queries ke results ko vertically combine karta hai
 133- Diff between type and Interface in typescript
-    interface → Used to define object shapes / contracts
+    a- Interface Supports Merging
         interface User {
-            id: number;
-            name: string;
+        name: string;
         }
-    type → Used to create type aliases
-        type User = {
-            id: number;
-            name: string;
+
+        interface User {
+        age: number;
+        }
+
+        const user: User = {
+        name: "Mritunjay",
+        age: 25
         };
+    b- Interface cannot supports unions.
+
+    a- Type Can Handle Primitive Types
+        type ID = string;
+    b- Only type supports unions.
+        type Status = "success" | "error" | "loading";
 
 
 134- Diff between delete and truncate
@@ -727,6 +967,7 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)   and asynchrono
     TRUNCATE does not exist                
         db.users.deleteMany({})      // similar to DELETE
         db.users.drop()              // similar to TRUNCATE
+        
 135- require vs import
     | require      | import       |
     | ------------ | ------------ |
@@ -914,6 +1155,14 @@ Q9. Questions to ask interviewer
     What are the current challenges in the project?
     Is there opportunity for learning and growth?
 
+What are dependencies?
+    These are packages required for the application to run in production.
+    If these packages are missing: Application may break
+    because app needs it in production.
+
+What are devDependencies?
+    These packages are needed only during development.
+    Not required in production runtime.
 
 
 

@@ -1,10 +1,28 @@
-//Q.1 Find non repeat string
-//     const data = SAwiSS
+//Q.1 Find repeat string
+// const data = "SAwiSS"
+// for(let i = 0; i < data.length; i++){
+//     for(let j = i + 1; j < data.length; j++){
+//         if(data[i].toLowerCase() === data[j].toLowerCase()){
+//             console.log(data[i])
+//         }
+//     }
+// }
 
 //Q.2  
 // 1
 // 1 35
 // 1 35 17
+// const arr = [1, 35, 17];
+// function printPattern(arr) {1
+//     for (let i = 0; i < arr.length; i++) {
+//         let row = ""
+//         for (let j = 0; j <= i; j++) {
+//             row += arr[j] + " "
+//         }
+//         console.log(row)
+//     }
+// }
+// printPattern(arr)
 
 //Q.3 Print numbers in descending order per row:
 // 54321
@@ -202,6 +220,22 @@
 //    ***
 //   *****
 //  *******
+// function printPattern(num){
+//     for(let i = 1; i <= num; i++){
+//         let row = ""
+//         for(let j = 1; j <= num -i ; j++){
+//             row += " "
+//         }
+//         for(let k = 1; k <= i; k++){
+//             row += "*"
+//         }
+//         for(let l = i -1 ; l >= 1; l--){
+//             row += "*"
+//         }
+//         console.log(row)
+//     }
+// }
+// printPattern(4)
 
 //Q.15 Inverted pyramid:
 //  *******
@@ -442,24 +476,24 @@
 // console.log(res[res.length - 2])
 
 //Q.41 find second smallest number in array
-    // const arrNum = [2,5,6,1,6,4,8,4]
-    // const arrLength = arrNum.length
+// const arrNum = [2,5,6,1,6,4,8,4]
+// const arrLength = arrNum.length
 
-    // const res =  arrNum.sort((a,b)=> b - a)
-    // or
-    // function customNumberSort(arr) {
-    //     for(let i = 0 ; i < arrLength - 1; i++){
-    //         for(let j = 0 ; j < arrLength - i - 1; j++){
-    //             if(arr[j] < arr[ j+ 1]){
-    //                 const temp = arr[j]
-    //                 arr[j] = arr[j + 1]
-    //                 arr[j + 1] = temp
-    //             }
-    //         }
-    //     }
-    //     return arr
-    // }
+// const res =  arrNum.sort((a,b)=> b - a)
+// or
+// function customNumberSort(arr) {
+//     for(let i = 0 ; i < arrLength - 1; i++){
+//         for(let j = 0 ; j < arrLength - i - 1; j++){
+//             if(arr[j] < arr[ j+ 1]){
+//                 const temp = arr[j]
+//                 arr[j] = arr[j + 1]
+//                 arr[j + 1] = temp
+//             }
+//         }
+//     }
+//     return arr
+// }
 
-    // const res =customNumberSort(arrNum)
-    // console.log(res[arrLength - 2])
+// const res =customNumberSort(arrNum)
+// console.log(res[arrLength - 2])
 

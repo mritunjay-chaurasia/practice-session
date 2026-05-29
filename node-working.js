@@ -19,7 +19,7 @@ const fs = require('fs')
 setTimeout(()=>{console.log("time out log")})
 
 fs.readFile('sample.txt','utf8',(err,text)=>{
-    console.log(text)
+    console.log(">>>>>")
     setTimeout(()=>{console.log("file read time out log")},0)
     setImmediate(()=>{console.log("set immediate 44")})
     console.log("66666")
