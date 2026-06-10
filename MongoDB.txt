@@ -119,7 +119,7 @@ Uses collection instead of tables
 
 6- What is BSON?
 BSON (Binary JSON) is the format MongoDB uses internally to store documents. It supports additional data types (like Date, ObjectId, Binary) beyond JSON.
-8288074412
+
 7- What is an upsert?
 when using updateOne() or updateMany(), then upsert option create new document if no match found.
 
