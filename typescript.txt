@@ -48,6 +48,28 @@ unknown:- I don’t know the type yet, but I will check it before using it
                 }
             }
 
+2- Diff between type and Interface in typescript
+Interface:
+    a- Interface Supports Merging
+        interface User {
+            name: string;
+        }
+
+        interface User {
+            age: number;
+        }
+
+        const user: User = {
+            name: "Mritunjay",
+            age: 25
+        };
+    b- Interface cannot supports unions.
+    
+type:
+    a- Type Can Handle Primitive Types
+        type ID = string;
+    b- Only type supports unions.
+        type Status = "success" | "error" | "loading";
 
 
 

@@ -1,8 +1,62 @@
 1-  Index in MongoDB?
-Indexes improve query performance by allowing MongoDB to quickly find documents instead of scanning the entire collection.
-An index in mongodb is a data structures that improves the speed of data fetching operations on a collection. You can create an index using the createIndex method.
-db.collection.createIndex({name:1}) usind in DB scripts or mongoshell
-userSchema.index({name:1}) using in code 
+    Indexing in MongoDB is used to improve query performance.
+    Without an index, MongoDB scans every document in a collection to find matching data.
+    With an index, MongoDB can directly locate the required documents.
+
+  Types of Indexes:
+    a. Single Field Index
+        db.users.createIndex({
+          email: 1
+        })
+        Most common.
+    b. Compound Index
+        db.users.createIndex({
+          name: 1,
+          age: 1
+        })
+        Used when queries filter by multiple fields.
+    c. Unique Index
+        db.users.createIndex(
+          { email: 1 },
+          { unique: true }
+        )
+        Prevents duplicate emails.
+    d. Text Index
+      db.posts.createIndex({
+        title: "text"
+      })
+      Used for searching text.
+    e. TTL Index
+        Automatically deletes documents after a specified time.
+        db.tokens.createIndex(
+          { createdAt: 1 },
+          { expireAfterSeconds: 3600 }
+        )
+        Example:
+          OTP records
+          Session records
+
+
+Disadvantages of Too Many Indexes
+a. More Storage
+  Indexes consume disk space.
+b. Slower Insert/Update
+    When data changes:
+      Document Updated
+      +
+      Index Updated
+    Extra work for MongoDB.
+How to Decide Which Field to Index?
+  Index fields that are:
+    Frequently searched
+    Used in filtering
+    Used in sorting
+    Used in joins/lookups
+      Examples:
+        email
+        userId
+        createdAt
+        status
 
 2- Perform data import and export in mongodb
 you can use mongoimport and mongoexport tools. using this tool we can import data from JSON , csv or TSV file into mongodb
@@ -65,7 +119,7 @@ Uses collection instead of tables
 
 6- What is BSON?
 BSON (Binary JSON) is the format MongoDB uses internally to store documents. It supports additional data types (like Date, ObjectId, Binary) beyond JSON.
-
+8288074412
 7- What is an upsert?
 when using updateOne() or updateMany(), then upsert option create new document if no match found.
 
@@ -119,8 +173,14 @@ type must be "Point".
   e- use aggregation pipelines when required
 
 14- MongoDB vs PostgreSQL – when do you use which?
-  I choose based on data structures and consistency requirements.
-
+    Database selection depends on:
+        application requirements
+        data structure
+        scalability
+        relationships
+        consistency requirements
+        query patterns
+        
 15- How do you handle relationships in MongoDB?
   a- Embedding for tightly coupled data
   b- Referencing using ObjectId for reusable data
@@ -514,3 +574,6 @@ db.users.find().skip(10).limit(10)
 db.users.find({
   status: "active"
 })
+
+What is ACID ?
+  ACID stands for Atomicity, Consistency, Isolation, and Durability. These properties ensure that database transactions are processed reliably and maintain data integrity. Relational databases like PostgreSQL support ACID by default, and MongoDB also supports ACID transactions, including multi-document transactions from version 4.0 onward.

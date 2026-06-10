@@ -72,7 +72,9 @@ e- Third-party middleware
 6- Request Pipeline in express :
    It is a series of middleware function that handle incomming HTTP request and pass control to the next function
 7- CORS (Cross origin resource sharing): Browser block frontend javascript code from making request from one port to another port 
+
 8- REST APIs => (Representational State Transform) Application programming Interface are architectural style for designing networked application . It is stateless and follow protocol of http or https. format like json and xml
+A REST API is called stateless because the server does not store any client session information between requests.
 SOAP API => Simplified Object Access protocol and follow protoco http or smtp and have state or stateless 
 
 9- Libuv library: Provides a thread pool and handles background tasks like file system operations and networking.

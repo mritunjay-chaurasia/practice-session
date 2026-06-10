@@ -33,8 +33,14 @@
     Absolute looks for nearest parent with position:relative  
 
 7- What is event-loop?
-    Event-loop is mechanisum in nodejs that are used to handle none-blocking , asynchronus operation using a single-threaded of nodejs.
-    Event loop are used to handle thousands of million request 
+    The Event Loop is a mechanism that continuously checks whether the Call Stack is empty. If it is, the Event Loop takes tasks from the Microtask Queue first and then from the Callback Queue (Macrotask Queue) and pushes them to the Call Stack for execution, enabling JavaScript to perform asynchronous operations while remaining single-threaded.
+
+        JavaScript is single-threaded.
+        Call Stack executes synchronous code.
+        Promises go to the Microtask Queue.
+        setTimeout, setInterval, DOM events go to the Macrotask Queue.
+        Microtasks always execute before Macrotasks.
+        Event Loop checks if the Call Stack is empty before moving queued tasks to it.
 
 8- Diff between node and express
     Nodejs => Nodejs is a single threaded run time environment that allow javascript to run on server using the V8 engine.
@@ -463,14 +469,8 @@ db.user.aggregate([
     git merge combines two branches by creating a new merge commit.
     git rebase moves commits from one branch on top of another branch.
 
-48- How to identify which database should use (mongodb or mysql) 
-    Database selection depends on:
-        application requirements
-        data structure
-        scalability
-        relationships
-        consistency requirements
-        query patterns
+48- How do you decide which database to use?
+    I select a database based on business requirements. If the application has structured data, complex relationships, frequent joins, and strong consistency requirements, I prefer PostgreSQL or MySQL. If the application requires flexible schemas, rapid development, and horizontal scalability, I prefer MongoDB. For large enterprise applications, I may use both databases together depending on the use case.
 
 49- Does Postman show CORS errors?
     No, because CORS is enforced only by browsers. Postman directly sends HTTP requests without browser security restrictions.
@@ -702,12 +702,7 @@ o. CSRF Protection
     use lean()
     Reduce unnecessary API calls
 
-87- What is the best approach for secure nodejs application
-    use input validation
-    use JWT token for Authentication
-    Role based Authorization
-    secure Headers using helmet middleware
-    use HTTPS
+87-
 
 88- How do you optimize React applications?
     I optimize React applications by:
@@ -794,8 +789,9 @@ Nested routes map to nested layouts via <Outlet />.
         }, []);
 
 104- What is react fiber?
-    React Fiber is React’s internal reconciliation engine (introduced in React 16) that controls how React updates the UI efficiently.
-    whithout react fiber UI could freeze during heavy updates
+    React Fiber is the new reconciliation engine introduced in React 16. It breaks rendering work into small units called fibers,
+    It is the internal algorithm React uses to perform reconciliation more efficiently.
+    This prevents the UI from freezing during heavy updates.
 
 105- What is deepcopy and shallow copies in js
 106- How to handle refresh token and access token
@@ -878,34 +874,58 @@ and app.use() handles all http methods (GET, POST, PUT. DELETE)   and asynchrono
     }, []);
 
 126- Why to use custom hooks?
-Custom hook name must start with: 'use'
-Reuse stateful logic between multiple components.
-Custom hooks are commonly used for:
-Authentication
-API calls
-Form handling
-Debouncing
-Pagination
-Infinite scroll
-Window resize
-Theme management
-Local storage
+    Custom hook name must start with: 'use'
+    Reuse stateful logic between multiple components.
+    Custom hooks are commonly used for:
+        Authentication
+        API calls
+        Form handling
+        Debouncing
+        Pagination
+        Infinite scroll
+        Window resize
+        Theme management
+        Local storage
 
-127- How to debug memory leaks?.
-    👉 --inspect
-    👉 heapdump
-    👉 Chrome DevTools
-    👉 process.memoryUsage()
+127- How to Detect Memory Leaks?
+    Chrome DevTools
+    Node Inspector (node --inspect app.js => Then analyze memory in Chrome.)
+    heapdump
+    process.memoryUsage()
+
+    Production Monitoring
+        Tools:
+            PM2
+            New Relic
+            Datadog
+
+        Monitor heap usage over time.
 
     Common causes:
-        Global variables
-        Event listeners not removed
-        Unreleased timers (setInterval)
-        Large objects kept in memory
-        Caching without eviction
-        Promises never resolved
-        Closures holding large objects
-        Growing arrays / maps
+        a- Global Variables (global.users = [];)
+        b- Unremoved Event Listeners (emitter.on("data", callback);)
+        c- Uncleared Timers (const timer = setInterval(fn, 1000); clearInterval(timer);)
+        d- Large Objects Stored in Memory 
+            Solution:
+                Implement cache expiration (TTL)
+                Use Redis instead of in-memory storage
+        e- Promises never resolved
+        f- Closures Holding References
+            function outer() {
+                const largeData = new Array(1000000);
+
+                return function inner() {
+                    console.log(largeData.length);
+                };
+            }
+    How to Handle Memory Leaks?
+        Remove unused event listeners.
+        Clear timers (setInterval, setTimeout).
+        Avoid global variables.
+        Use streaming for large files instead of loading everything into memory.
+        Limit in-memory caching; use Redis when appropriate.
+        Profile memory with heap snapshots.
+        Monitor memory usage in production.
 
 128- What is the limit memory or nodejs and how to improve it.
 Memory usage can be improved using streams, pagination, optimized queries, proper cleanup, clustering, and avoiding memory leaks.
@@ -1088,7 +1108,7 @@ Logout (Clear Cookie)======>>>
     res.json({ message: "Logged out" });
     });
 
-Q1. Tell me about yourself.
+139. Tell me about yourself.
     Hi, my name is Mritunjay Chaurasia. I am a Full Stack Developer with around 4 years of experience specializing in the MERN stack and Next.js.
 
     I have worked on healthcare and gaming platforms where I handled both frontend and backend development. My expertise includes React.js, Next.js, Node.js, Express.js, MongoDB, PostgreSQL, Redis, and TypeScript.
@@ -1099,7 +1119,7 @@ Q1. Tell me about yourself.
 
     I enjoy solving real-world problems, optimizing performance, and building user-friendly applications.
 
-Q2. What are your main responsibilities in your current company?
+140. What are your main responsibilities in your current company?
     My responsibilities include:
         Developing frontend applications using React.js and Next.js
         Building RESTful APIs using Node.js and Express.js
@@ -1110,10 +1130,10 @@ Q2. What are your main responsibilities in your current company?
         Optimizing performance and scalability
         Collaborating with designers, QA teams, and stakeholders
 
-Q3. Why are you looking for a job change?
+141. Why are you looking for a job change?
     I am looking for better growth opportunities, challenging projects, and long-term career development where I can enhance my full stack development skills and contribute to scalable products.
 
-Q4. Explain your role in the Beek Health project.
+142. Explain your role in the Beek Health project.
     In the Beek Health project, I worked as a Full Stack Developer using Next.js, Node.js, PostgreSQL, and Redis.
 
     My responsibilities included:
@@ -1125,7 +1145,7 @@ Q4. Explain your role in the Beek Health project.
         Optimizing backend performance using Redis caching
         Integrating third-party healthcare APIs
 
-Q5. Explain the SlotBunny project.
+143. Explain the SlotBunny project.
     SlotBunny is a gaming platform where I worked on scalable frontend and backend features using Next.js and Node.js.
 
     I implemented:
@@ -1135,34 +1155,70 @@ Q5. Explain the SlotBunny project.
         Third-party casino provider integrations
         API performance optimization
 
-Q6. What are your strengths?
+144. What are your strengths?
     Problem-solving
     Quick learning
     Team collaboration
     Debugging skills
     Full stack development expertise
 
-Q7. What is your weakness?
+145. What is your weakness?
     Sometimes I spend extra time perfecting implementation details, but now I focus more on balancing quality with deadlines.
 
-Q8. Where do you see yourself in 5 years?
+146. Where do you see yourself in 5 years?
     I see myself growing into a Senior Full Stack Developer or Technical Lead role, working on scalable applications and mentoring junior developers.
 
-Q9. Questions to ask interviewer
+147. Questions to ask interviewer
     Examples:
     What technologies does your team mainly use?
     How is the development workflow managed?
     What are the current challenges in the project?
     Is there opportunity for learning and growth?
 
-What are dependencies?
+148. What are dependencies?
     These are packages required for the application to run in production.
     If these packages are missing: Application may break
     because app needs it in production.
 
-What are devDependencies?
+149. What are devDependencies?
     These packages are needed only during development.
     Not required in production runtime.
+
+150. Diff between aws and s3
+| AWS                                   | S3
+AWS stands for **Amazon Web Services**  | S3 stands for **Simple Storage Service**
+AWS is a complete cloud platform        | S3 is one service within AWS
+AWS provides 200+ services              | S3 only provides object storage
+Includes EC2, S3, RDS, Lambda, CloudFront| Used to store files, images, videos, backups, documents
+Acts as the umbrella/cloud ecosystem    | Acts as a storage solution
+
+What is S3 used for?
+    Store user profile images
+    Store PDFs and documents
+    Website static hosting
+    Store videos
+    Application backups
+    Log storage
+
+151. What is PWA (Progressive Web App)?
+    A Progressive Web App (PWA) is a web application that behaves like a mobile app while running in a browser.
+        Installable on mobile and desktop
+        Works offline or with poor internet
+        Fast loading using caching
+        Push notifications
+        Responsive on all devices
+        No need to download from Play Store/App Store
+
+152. Tell me about the most challenging issue you've faced.
+    In one of Geeker project, users were reporting very slow dashboard loading. After investigating, I found that multiple MongoDB aggregations and repeated API calls were causing performance bottlenecks. I analyzed the queries, added indexes, optimized aggregations, implemented Redis caching, and reduced unnecessary API requests. This improved response time from several seconds to under two seconds and significantly enhanced the user experience.
+
+153. What functionality or feature are you most proud of building?
+    Dashboard Performance Optimization (Excellent for Senior Roles)
+        The work I am most proud of is optimizing a slow dashboard that was affecting user experience. Some pages were taking several seconds to load due to complex database queries and large datasets.
+
+        I analyzed API performance, optimized MongoDB queries, added indexes, implemented Redis caching, and reduced redundant API calls.
+
+        After deployment, response times improved significantly and users immediately noticed the difference. I am proud of this because it required problem-solving, debugging, backend optimization, and collaboration with the team.
 
 
 

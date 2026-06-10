@@ -1,3 +1,37 @@
-Hi, I'm mritunjay chaurasia a fullstack developer with 4 years experience in building scalable and production-ready web applications using reactjs, nextjs, nodejs, expressjs, mongodb, postgresql, redux, redis, websocket, javascript and typescript.
-I specailized in mern stack development, RESTful APIs, authentication system, performance optimization and responsive ui development.
-I have worked on healthcare, gaming and customer support plateforms, contributing to end-to-end feature development, debugging, third party integrations, and scalable application architecture.  
+**Responsibilities**
+
+* Develop, test, deploy, and maintain scalable web applications using the MERN Stack (MongoDB, Express.js, React.js, Node.js) and Next.js.
+* Collaborate with cross-functional teams, including Product Managers, UI/UX Designers, QA Engineers, and stakeholders, to deliver high-quality software solutions.
+* Design, develop, and implement new features while enhancing and maintaining existing applications.
+* Write clean, maintainable, reusable, and well-documented code following industry best practices and coding standards.
+* Architect and implement scalable, high-performance, and secure application solutions.
+* Optimize application performance, responsiveness, and overall user experience.
+* Troubleshoot, debug, and resolve complex technical issues to ensure system reliability and stability.
+* Develop and integrate RESTful APIs and third-party services.
+* Implement authentication and authorization mechanisms using JWT and OAuth 2.0.
+* Utilize Redis caching to improve application performance and reduce database load.
+* Work with cloud platforms and deployment environments to ensure seamless application delivery.
+* Leverage API testing and development tools such as Postman for efficient API validation and debugging.
+* Build responsive and user-friendly interfaces using Tailwind CSS, Bootstrap 5, and Material UI.
+* Follow secure coding practices and implement security guidelines to protect applications and user data.
+* Adhere to coding standards by avoiding hard-coded values, minimizing code duplication, and promoting code reusability.
+* Reuse and customize existing components, libraries, and open-source solutions to accelerate development while maintaining quality standards.
+* Participate in code reviews, knowledge-sharing sessions, and continuous improvement initiatives.
+* Stay updated with emerging technologies, industry trends, and best practices in web development.
+
+
+
+Design, develop, and maintain scalable full stack web applications
+Build responsive frontend interfaces and operational dashboards using React and TypeScript
+Develop backend services, APIs, database structures, and workflow logic
+Convert Excel/Google Sheet-driven workflows into centralized digital systems
+Design secure and scalable relational database architecture using PostgreSQL/Supabase
+Implement authentication, authorization, and Row Level Security (RLS)
+Integrate third-party services, APIs, and automation workflows where required
+Collaborate with operations and management teams to understand business processes and operational requirements
+Participate in system design, workflow planning, and architecture discussions
+Optimize applications for scalability, performance, reliability, and maintainability
+Conduct code reviews and maintain engineering best practices
+Troubleshoot production issues and improve system stability
+Maintain proper technical documentation and workflow notes
+Work in an ownership-driven and execution-focused environment

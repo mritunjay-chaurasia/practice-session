@@ -8,7 +8,7 @@
     we can use worker_threads module to run JS in parallel threads.
     Each worker has its own event loop, memory, and V8 instance.
 
-3- if we delete package.lockjson file will delete from server then it is working or not
+3- if we delete package-lock.json file will delete from server then it is working or not
     If you delete it, the project might still run.
     But you lose version control guarantees → may break later.
 
@@ -28,15 +28,19 @@
     f- Community Support & Open Source
 
 5- What are some disadvantages of Node.js? 
-    a- Single-threaded Limitations
-        While Node.js can scale horizontally (via cluster mode), a single process doesn’t take full advantage of multi-core CPUs by default.
-        Requires manual setup (clusters, worker threads).
-    b- Error Handling Challenges
-        Asynchronous error handling is trickier compared to synchronous languages.
-        Forgetting to handle errors in async code can crash the app.
-    c- Not Suitable for Heavy Computation
-        Event loop may become blocked by CPU-heavy operations.
-        Heavy CPU tasks (like image processing, video encoding, or complex math) can block the event loop and slow down the app.
+    Node.js runs on a single thread using the event loop.
+
+    ❌ Not ideal for CPU-intensive tasks such as:
+
+    Image processing
+    Video encoding
+    Heavy calculations
+    Data analytics
+
+    This blocks the event loop and prevents other requests from being processed.
+
+    Solution: Use Worker Threads, Child Processes, or Microservices.
+    
 6- What are Modules?
     A module is simply a reusable block of code that can be split into separate files and imported when needed.
     Types of Modules in Node.js
@@ -67,10 +71,16 @@
         Results are handled using callbacks, promises, or async/await.
 
 8- What is the difference between CommonJS (require) and ES Modules (import)?
-        Feature	          CommonJS (CJS)	                 ES Modules (ESM)
-        Syntax	          require, module.exports	         import, export
-        Loading	          Synchronous	                     Asynchronous
+            	          CommonJS (CJS)	             ES Modules (ESM)
+        Syntax	          require               	     import
+        Loading	          Modules load synchronously.	 Modules are loaded asynchronously.
         Export style	  module.exports = ...	            export / export default
+
+        To use ES Modules in Node.js inside package.json.
+        {
+        "type": "module"
+        }
+        Without this, Node.js treats files as CommonJS by default.
 
 9- What is package.json and package-lock.json?
     a- package.json- 
@@ -111,8 +121,10 @@
     Promises (microtasks)
     This is why Node.js is efficient for I/O-heavy backend systems.
 
-14- What is non-blocking I/O in Node.js?
-        Non-blocking I/O in Node.js means operations don’t stop program execution while waiting for results — instead, they use callbacks, promises, or async/await so Node can continue doing other work.
+14- Event Loop Architecture in JavaScript / Node.js
+    JavaScript is single-threaded, meaning it executes one task at a time. The Event Loop allows JavaScript to handle asynchronous operations (API calls, timers, file operations, etc.) without blocking the main thread.
+
+    The Event Loop is a mechanism that continuously checks whether the Call Stack is empty. If it is, the Event Loop takes tasks from the Microtask Queue first and then from the Callback Queue (Macrotask Queue) and pushes them to the Call Stack for execution, enabling JavaScript to perform asynchronous operations while remaining single-threaded.
 
 15- What is the difference between setTimeout, setInterval, and setImmediate?
     a- setTimeout:-  Executes a function after specified delay in miliseconds
@@ -124,13 +136,7 @@
     Node.js uses the built-in child_process module to create and manage child processes. It provides methods like spawn, exec, execFile, and fork to run system commands or separate Node.js scripts. Child processes run outside the main event loop and communicate with the parent via events or IPC, which helps avoid blocking and enables parallel execution of heavy tasks.
 
 17- Explain streams in Node.js and their types.
-    In NodeJS, streams are a powerful way to handle data in chunks rather than loading the entire data into memory. Streams allow for the efficient processing of large volumes of data, especially in situations where the data size is too large to fit into memory all at once.
-
-    They are especially useful for large files, network requests, or real-time data.
-
-    Example: Reading a 5GB file — instead of loading the whole file into memory, Node.js reads it piece by piece (chunks) using streams.
-
-    There are 4 types: Readable (for reading), Writable (for writing), Duplex (both read & write like socket), and Transform (read/write with modification, like crypto). Streams are event-driven and help with performance and memory optimization.
+    Streams in Node.js are objects that allow processing data in chunks instead of loading the entire data into memory. They improve performance and memory efficiency when handling large files, network requests, or real-time data. Node.js provides four types of streams: Readable Streams for reading data, Writable Streams for writing data, Duplex Streams for both reading and writing, and Transform Streams for modifying data while it is being streamed. The pipe() method is commonly used to connect streams efficiently.
 
 18- What is buffer in Node.js?
     A Buffer in Node.js is a temporary storage area for raw binary data.
@@ -184,16 +190,15 @@ with promises we can use .catch() method and in modern code async/await with try
     By default, it uses only one CPU core — even if your system has 8 cores.
     Clustering allows Node.js to create multiple processes (workers) that share the same server port, enabling full use of multi-core CPUs and handling more requests in parallel.
     Benefits of Clustering:
-
-    i- Better CPU Utilization – Uses multiple cores.
-    ii- Increased Throughput – Handles more concurrent requests.
-    iii- Fault Tolerance – If one worker crashes, others keep running.
-    iv- Scalability – Handles high-traffic apps more efficiently.
+        i- Better CPU Utilization – Uses multiple cores.
+        ii- Increased Throughput – Handles more concurrent requests.
+        iii- Fault Tolerance – If one worker crashes, others keep running.
+        iv- Scalability – Handles high-traffic apps more efficiently.
 
 24-What are worker threads in Node.js?
     Worker Threads in Node.js allow running JavaScript in parallel on multiple threads inside the same process. They are mainly used for CPU-intensive tasks, unlike clustering which creates separate processes for I/O scalability. Worker threads can share memory using SharedArrayBuffer and communicate via message passing, making them useful for heavy computations without blocking the event loop.
 
-25-What are the differences between cluster, child_process, and worker_threads?
+25-What are the differences between cluster, child_process and worker_threads?
     cluster:
     have multiple process
     each process has its own memory space
@@ -290,7 +295,22 @@ c- Transparent proxy- Used by organizations to monitor or control to internet us
     When data is produced faster than it can be consumed.
     Node streams handle it via:
         stream.pipe(dest);
+40- How to Detect Memory Leaks?
+    Use:
+        Chrome DevTools
+        Node Inspector (node --inspect app.js) => Then analyze memory in Chrome.
+    Production Monitoring
+        Tools:
+            PM2
+            New Relic
+            Datadog
 
-
-
+41- How to Handle Memory Leaks
+        Remove unused event listeners.
+        Clear timers (setInterval, setTimeout).
+        Avoid global variables.
+        Use streaming for large files instead of loading everything into memory.
+        Limit in-memory caching; use Redis when appropriate.
+        Profile memory with heap snapshots.
+        Monitor memory usage in production.
 

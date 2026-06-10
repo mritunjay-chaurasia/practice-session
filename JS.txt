@@ -174,10 +174,10 @@ Event Capturing: event start from  parent to child (outer to inner)
 24- Event delegation => Event delegation is a javascript technique which allows us to  add singal events listener to parent element.
 
 25- Interview Question
-console.log("A");
-setTimeout(() => console.log("B"), 0);
-Promise.resolve().then(() => console.log("C"));
-console.log("D");
+    console.log("A");
+    setTimeout(() => console.log("B"), 0);
+    Promise.resolve().then(() => console.log("C"));
+    console.log("D");
 
 Ans:= ADCB
 console.log("A"); and console.log("D"); is synchronous and goes directly to callstack and Executes immediately

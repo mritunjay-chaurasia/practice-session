@@ -10,7 +10,6 @@ const PORT = 3000;
 
 const numCPUs = os.cpus().length;
 // console.log(`Number of CPU cores: ${numCPUs}`);
-
 if (cluster.isPrimary) {
     for (let i = 0; i < numCPUs; i++) {
         cluster.fork();
@@ -24,6 +23,9 @@ if (cluster.isPrimary) {
     })
     console.log(`Worker ${process.pid} started`);
 }
+
+
+
 
 
 
