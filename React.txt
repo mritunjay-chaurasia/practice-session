@@ -1,21 +1,209 @@
-1- State => Internal data managed by the component and that will be changed over time.
-2- props =>  External data pass from parent component to child component
-3- key => key prop are used to uniquely identify the  element in a list.
-4- Controlled component:- form input value is controlled by react state. 
-   UnControlled component:- form input value is store in dom. Accessged using ref.
-5- Pitfalls: Putting too much state in single context
-6- React context: React context provides a way to share golbal state.
-7- useEffect => does not block using for DOM manipulation, fetching data after intial render
-useLayoutEffect => blocks rendering until executed. 
-8- dependency array of useEffect affect => array determines when the effect should be re-executed after renders.
+1. What is React?
+    React is a JavaScript library for building user interfaces. It uses a component-based architecture and a Virtual DOM to efficiently update the UI.
+    Benefits:
+        Reusable components
+        Fast rendering using Virtual DOM
+        One-way data flow
+        Large ecosystem
 
-9- useCallback => used for memoized function that used performance optimized and prevent    unnecessarily rerender and specialy used inside child component.
+2. What is Virtual DOM?
+    Virtual DOM is a lightweight copy of the real DOM.
+    Working:
+        React creates a Virtual DOM.
+        When state changes, React creates a new Virtual DOM.
+        React compares old and new Virtual DOM (Diffing).
+        Only changed elements are updated in the real DOM.
 
-10- useMemo => used for memoized result of function that improve performance
+        This improves performance.
 
-11- useReducer => that are used for managed complex state logic and it is alternative of useState and is a function that take current state and action as an argument  and after proccessing  return new state. 
+3. What is Reconciliation?
+    Reconciliation is the process React uses to compare the old Virtual DOM with the new Virtual DOM and update only the changed parts in the actual DOM.
 
-12- Explain createAsyncThunk and its action lifecycle.
+4. What is React Fiber?
+    React Fiber is React's reconciliation engine introduced to improve rendering performance.
+    Features:
+        Incremental rendering
+        Prioritization of updates
+        Better handling of animations
+        Concurrent rendering support
+
+5. Difference Between State and Props
+    | State                    | Props                           |
+    | ------------------------ | ------------------------------- |
+    | Mutable                  | Immutable                       |
+    | Managed inside component | Passed from parent              |
+    | Can change over time     | Read-only                       |
+    | Triggers re-render       | Triggers re-render when changed |
+
+6. What is JSX?
+    JSX is a syntax extension that allows writing HTML-like code inside JavaScript.
+        const element = <h1>Hello World</h1>;
+        React converts JSX into:
+        React.createElement("h1", null, "Hello World");
+
+7. What are React Hooks?
+    Hooks allow functional components to use React features like state and lifecycle methods.
+    Common hooks:
+        useState
+        useEffect
+        useMemo
+        useCallback
+        useRef
+        useContext
+
+8. Difference Between useEffect and useLayoutEffect
+    useEffect => DOM manipulation, fetching data after intial render
+        does not block rendering
+        Runs after DOM is painted.
+    useLayoutEffect => 
+        blocks rendering until executed.
+        Runs synchronously before browser paints.
+    Use only when DOM measurement is needed.
+
+9. Explain useMemo
+    Used to memoize expensive calculations.
+    Prevents unnecessary recalculation.
+
+    function handleFun(a,b){
+        console.log("aaaa")
+        return a+b
+    }
+
+    const total = useMemo(()=> {return handleFun(2,4)},[])
+
+10. Explain useCallback
+    useCallback memoizes a function reference;. When a function is passed from a parent component to a child component as a prop, React normally creates a new function reference every time the parent re-renders. Because the function reference changes, the child component may also re-render unnecessarily. useCallback keeps the same function reference between renders unless its dependencies change, helping prevent unnecessary child component re-renders.
+
+    const Child = React.memo(({ onClick }) => {
+    console.log("Child Rendered");
+    return <button onClick={onClick}>Click</button>;
+    });
+
+    function Parent() {
+    const [count, setCount] = useState(0);
+
+    const handleClick = useCallback(() => {
+        console.log("Clicked");
+    }, []);
+
+    return (
+        <>
+        <button onClick={() => setCount(count + 1)}>
+            Increment
+        </button>
+
+        <Child onClick={handleClick} />
+        </>
+    );
+    }
+
+    Without useCallback
+        Parent Render 1 → handleClick = fn1
+        Parent Render 2 → handleClick = fn2
+        Parent Render 3 → handleClick = fn3
+    Since the reference changes every time, React.memo sees a different prop and re-renders the child.
+
+    With useCallback
+        Parent Render 1 → handleClick = fn1
+        Parent Render 2 → handleClick = fn1
+        Parent Render 3 → handleClick = fn1
+    The reference stays the same, so React.memo can skip the child re-render.
+
+11. Difference Between useMemo and useCallback
+    | useMemo        | useCallback       |
+    | -------------- | ----------------- |
+    | Memoizes value | Memoizes function |
+    | Returns value  | Returns function  |
+
+12. What is React.memo?
+    React.memo is a Higher-Order Component that Prevents unnecessary re-rendering of functional components.
+    Component re-renders only if props change.
+
+    const Child = React.memo(() => {
+        console.log("Child Rendered");
+        return <h1>Child</h1>;
+    });
+
+    function Parent() {
+        const [count, setCount] = useState(0);
+
+        return (
+            <>
+            <button onClick={() => setCount(count + 1)}>
+                Increment
+            </button>
+
+            <Child />
+            </>
+        );
+    }
+
+    When count changes:
+        Parent re-renders ✅
+        Child has no props ✅
+        React.memo compares previous props {} with current props {}
+        They are equal ✅
+        Child does not re-render ✅
+
+13. How to Optimize React Performance?
+    React.memo
+    useMemo
+    useCallback
+    Code Splitting
+    Lazy Loading
+    Virtualization
+    Proper Key Usage
+    Avoid unnecessary state updates
+
+14. What is Lazy Loading?
+    Loads components only when needed.
+        const Dashboard = React.lazy(()=> import('./Dashboard))
+            <Suspense fallback={<Loader/>}>
+                <Dashboard />
+            </Suspense>
+    Reduces bundle size.
+
+15. What is Code Splitting?
+    Breaking application bundle into smaller chunks.
+    Benefits:
+        Faster page load
+        Better performance
+        Reduced initial bundle size
+
+16. Explain Context API
+    Used to share data globally without prop drilling.
+
+17. What is Prop Drilling?
+    Passing props through multiple levels of components.
+
+18. What is Controlled Component?
+    React controls form data through state.
+    UseCase:
+    Use controlled when you need validation on every keystroke, conditional disabling, or to transform input (e.g., uppercasing).
+
+19. What is Uncontrolled Component?
+    DOM controls form data.
+    UseCase:
+    Use uncontrolled for very large forms where per-keystroke re-renders hurt performance, or when integrating with non-React libraries.
+    const ref = useRef();
+
+    <input ref={ref} />
+
+20. Explain useRef
+    Stores mutable values without causing re-renders.
+    const inputRef = useRef();
+    Uses:
+        Access DOM elements
+        Store previous values
+        Timer IDs
+
+21. What Causes Re-rendering?
+    State change
+    Props change
+    Context change
+    Parent re-render
+
+22- Explain createAsyncThunk and its action lifecycle.
     createAsyncThunk wraps an async function and dispatches three actions automatically: .pending, .fulfilled, .rejected. You handle these in extraReducers to update loading flags, data, and errors.
     export const fetchUser = createAsyncThunk(
     'users/fetchById',
@@ -37,54 +225,189 @@ useLayoutEffect => blocks rendering until executed.
     }
     });
 
-13- useRef => used for accessing DOM element, Storing mutable values, Managing focus
 
-14- forwardRef() => is a React API that allows a component to pass ref in child component
+23. What is Hydration?
+    Hydration is the process where React attaches event listeners to HTML rendered on the server.
+    React 19 improves hydration performance and error reporting.
 
-15- React hydration => is the process where server rendered html page  on client side 
+24. Explain React Key
+    Keys help React identify list items.
 
-16- React Suspense => React Suspense is a feature that allows you to handling asynchronus operation like data fetching or code splitting by showing fallback content while waiting a resource.
+25. What is Error Boundary?
+    Catches JavaScript errors in component tree.
 
-17- What is reconciliation in React?
-    Reconciliation is React's diffing process. When state or props change, React creates a new Virtual DOM, compares it with the previous one, and updates only the changed elements in the real DOM instead of re-rendering the entire page.
+26. What is Higher Order Component (HOC)?
+    A function that takes a component and returns a new component.
+
+27. Redux vs Context API
+    | Redux              | Context API        |
+    | ------------------ | ------------------ |
+    | Complex state      | Small/medium state |
+    | Middleware support | No middleware      |
+    | Better debugging   | Basic              |
+    | Large apps         | Small apps         |
 
 
-18- React.memo => React.memo is a HOC that memoizes function component and preventing it  re-rendring unless it prop changed 
 
-19- Optimize a MERN application for performance =>
-    a- Memoization: 
-        Use React.memo for components and useMemo or useCallback for
-        values/functions.
-    b- Code splitting / lazy loading:
-    c- Avoid anonymous functions in render
-    d- Use indexing and aggregation in MongoDB
-    e- Use lazy loading and memoization in react 
-    f- Implement caching with Redis
-    g- Apply pagination and limit queries
-    f- Use async/await with proper error handing in node/express   
+28- dependency array of useEffect affect => array determines when the effect should be re-executed after renders.
 
-20- What’s the difference between componentDidMount and useEffect in React?
+29- useReducer => that are used for managed complex state logic and it is alternative of useState and is a function that take current state and action as an argument  and after proccessing  return new state. 
+
+
+30- forwardRef() => is a React API that allows a component to pass ref in child component
+
+31- React Suspense => 
+    React Suspense is a feature that allows you to handling asynchronus operation like data fetching or code splitting by showing fallback content while waiting a resource.
+   
+    import { Suspense } from "react";
+    const Dashboard = React.lazy(() => import("./Dashboard"));
+    
+    <Suspense fallback={<h1>Loading...</h1>}>
+        <Dashboard />
+    </Suspense>
+
+32- What’s the difference between componentDidMount and useEffect in React?
 componentDidMount is used in class components, while useEffect is a hook for function components that can handle mounting, updating, and cleanup
 
-21- How do you handle state management in React?
-Local state: useState or useReducer
-Global state: context Api or reducx toolkit
+33- How do you handle state management in React?
+    Local state: useState or useReducer
+    Global state: context Api or reducx toolkit
 
-22- What is React fiber ?
-    React Fiber is the new reconciliation engine introduced in React 16. It breaks rendering work into small units called fibers,
-    It is the internal algorithm React uses to perform reconciliation more efficiently.
-    This prevents the UI from freezing during heavy updates.
-
-23- SSR in React without Next.js?
+34- SSR in React without Next.js?
     No, React itself does not provide SSR capabilities.
 
+35- What is Re-render in React?
+    A re-render means React calls the component function again to generate a new Virtual DOM and check whether the UI needs updating.
 
 
+36- Code splitting (stable since React 16.6) — React.lazy throws a promise while loading the chunk. Suspense catches it and shows the fallback.
+
+37- How do you actually find unnecessary re-renders?
+React DevTools Profiler — record an interaction, inspect which components rendered and why.
+
+27- How do you handle image optimization in React?
+    Serve modern formats (AVIF, WebP) with fallbacks.
+    Serve responsive sizes via srcset/sizes.
+    Always specify width and height (or aspect ratio) to prevent CLS.
+    Lazy-load below-the-fold images (loading="lazy").
+    Preload the LCP image (fetchpriority="high").
+    Frameworks automate this: Next.js <Image>, Remix + remix-image. For plain React/Vite, use a CDN with transform params (Cloudinary, imgix, Cloudflare Images).
+
+How React rendering works internally?
 
 
+How do you optimize a slow React application?
+    First, I identify the bottleneck using React DevTools Profiler and Chrome Performance tools. Then I optimize based on the root cause—prevent unnecessary re-renders with React.memo, useMemo, and useCallback; reduce bundle size using code splitting and lazy loading; optimize API calls with caching and debouncing; virtualize large lists; and improve asset loading. Finally, I re-profile the application to verify the performance improvement.
+
+What causes unnecessary re-renders?
+    Unnecessary re-renders are commonly caused by parent component updates, new object or function references, context changes, inline props, unstable keys, and unnecessary global state updates. I use React DevTools Profiler to identify the cause, then optimize with React.memo, useMemo, useCallback, proper state management, and stable references where appropriate.
 
 
+How do you implement authentication in React?
+    I implement authentication using JWT. The React app sends the user's credentials to the backend, which verifies them and issues an access token. In production, I prefer storing sensitive tokens in HTTP-only cookies rather than localStorage for better security. Protected API requests include the access token, and the backend validates it using middleware. On the frontend, I use protected routes to restrict access to authenticated users. I also implement refresh tokens so users remain logged in without repeatedly entering their credentials, while keeping access tokens short-lived for security.
+
+How do you handle API caching?
+    I handle API caching using RTK Query or React Query because they provide automatic caching, request deduplication, background refetching, and cache invalidation. I choose cache durations based on how frequently the data changes. After create, update, or delete operations, I invalidate the relevant cache so fresh data is fetched. For search APIs, I use debouncing to reduce unnecessary requests, and for large datasets I use pagination or infinite scrolling. I also rely on browser HTTP caching where appropriate, but I avoid storing sensitive data in local storage
+
+How do you structure a large React project?
+    For a large React application, I prefer a feature-based architecture because it scales well as the project grows. Each feature, such as authentication or users, has its own components, pages, hooks, services, and state. Shared UI components like buttons and modals are placed in a common components folder, while API logic is separated into service files. I use Redux Toolkit with RTK Query for global state and server-state management, and keep component-specific UI state local using useState. I also implement lazy loading, code splitting, protected routes, environment-based configuration, and reusable custom hooks. This structure improves maintainability, supports team collaboration, and makes the application easier to extend
+
+Why use HTTP-only cookies?
+    Not accessible via JavaScript.
+    Better protection against XSS.
+    Automatically included with requests (when configured appropriately).
 
 
+How to optimized large list in react? suppose want to render 10000+ items
+    Virtualization: it renders only visible items
+    react-window or react-virtualized library are used for Virtualization
+
+
+1. What are the major features introduced in React 19?
+Answer
+
+React 19 introduces several improvements to simplify data fetching, forms, and server integration. Some key features are:
+
+    Actions for handling async operations
+    useActionState
+    useFormStatus
+    useOptimistic
+    Native support for ref as a prop (no need for forwardRef in many cases)
+    Better support for Server Components
+    Document Metadata management (<title>, <meta>)
+    Improved Suspense and hydration
+    Better developer warnings and performance improvements
+
+2. What are Actions in React 19?
+    Actions are asynchronous functions used to handle form submissions and state updates. React automatically manages pending, success, and error states.
+    
+    async function saveUser(formData) {
+        await fetch("/api/users", {
+            method: "POST",
+            body: formData,
+        });
+    }
+
+    <form action={saveUser}>
+        <input name="name" />
+        <button type="submit">Save</button>
+    </form>
+
+3. What is useActionState?
+    useActionState manages state for form actions.
+
+    const [state, formAction, isPending] = useActionState(
+    async (prevState, formData) => {
+        return await saveUser(formData);
+    },
+    null
+    );
+
+    <form action={formAction}>
+        <button disabled={isPending}>
+            Save
+        </button>
+    </form>
+
+4. What is useFormStatus?
+    useFormStatus provides the status of the nearest parent form.
+
+    function SubmitButton() {
+        const { pending } = useFormStatus();
+
+        return (
+            <button disabled={pending}>
+            {pending ? "Saving..." : "Save"}
+            </button>
+        );
+    }
+
+    Useful for disabling buttons during submission.
+
+5. What is useOptimistic?
+    useOptimistic updates the UI immediately before the server responds, improving perceived performance.
+
+    const [comments, addOptimisticComment] = useOptimistic(
+    initialComments,
+    (state, newComment) => [...state, newComment]
+    );
+
+    Real-world example:
+        A user submits a comment:
+        Show the comment immediately.
+        Send the API request.
+        If it fails, remove or update the optimistic comment.
+
+    This provides a smoother user experience.
+
+9. What is Document Metadata support?
+    React 19 allows rendering metadata directly in components.
+
+    <>
+    <title>User Dashboard</title>
+    <meta name="description" content="Dashboard page" />
+    </>
+
+    This removes the need for libraries like react-helmet in many cases.
 
 

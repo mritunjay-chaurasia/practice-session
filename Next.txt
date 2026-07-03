@@ -1,0 +1,48 @@
+1- Explain SSR, CSR, SSG, ISR.
+SSR: (Server Side Rendering): The server generates HTML on every request and sends fully rendered content to the browser.
+    export async function getServerSideProps() {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        return {
+            props: { data }
+        };
+    }
+
+CSR: (Client Side Rendering): The server sends a minimal HTML file and JavaScript bundle. The browser downloads the JS and renders the page.
+
+SSG (Static Site Generation): Pages is genrated at build time and served as static HTML
+    export async function getStaticProps() {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        return {
+            props: { data }
+        };
+    }
+
+ISR (Incremental Static Regeneration):
+    ISR combines SSG and SSR.
+    After 60s cache expires
+    Next Request
+    Regenerate Page
+    Update Cache
+
+    export async function getStaticProps() {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        return {
+            props: { data },
+            revalidate: 60
+        };
+    }
+
+2- When would you choose SSR over SSG?
+    I would use SSR when the data changes on every request or is user-specific. For example, a news homepage showing the latest articles or a personalized dashboard. SSG is better when the content changes infrequently because pages are generated at build time and served quickly from a CDN.
+
+3- Which is fastest?
+    SSG is usually the fastest because pages are pre-built and served from a CDN.
+
+4-Which is best for SEO?
+    SSR, SSG, and ISR are all excellent for SEO because search engines receive rendered HTML.
+
+5- Why is CSR not ideal for SEO?
+    Because search engines may not immediately execute JavaScript, and users see content only after the JS bundle loads.

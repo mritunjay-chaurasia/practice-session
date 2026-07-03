@@ -1,11 +1,11 @@
 //Q.1 Find repeat string
 // const data = "SAwiSS"
 // for(let i = 0; i < data.length; i++){
-//     for(let j = i + 1; j < data.length; j++){
-//         if(data[i].toLowerCase() === data[j].toLowerCase()){
-//             console.log(data[i])
-//         }
+// for(let j = 0; j < i; j++){
+//     if(data[i] == data[j]){
+//         console.log(data[j])
 //     }
+    // }
 // }
 
 //Q.2  
@@ -13,7 +13,7 @@
 // 1 35
 // 1 35 17
 // const arr = [1, 35, 17];
-// function printPattern(arr) {1
+// function printPattern(arr) {
 //     for (let i = 0; i < arr.length; i++) {
 //         let row = ""
 //         for (let j = 0; j <= i; j++) {
@@ -205,9 +205,9 @@
 // **
 // *
 
-// for (let i = 5; i >= 1; i--) {
+// for(let i = 1; i <= n; i++){
 //     let row = ""
-//     for (let j = i; j >= 1; j--) {
+//     for(let j = 1; j <= n - i + 1; j++){
 //         row += "*"
 //     }
 //     console.log(row)
@@ -242,6 +242,21 @@
 //   *****
 //    ***
 //     *
+
+// let n = 4
+// for(let i = 1; i <= n; i++){
+//     let row = ""
+//     for(let k = 1; k <= i ; k++){
+//         row += " "
+//     }
+//     for(let j = 1; j <= n - i + 1; j++){
+//         row += "*"
+//     }
+//     for(let m = n - i; m >= 1; m--){
+//         row += "*"
+//     }
+//     console.log(row)
+// }
 
 //Q.16 Diamond
 //     *
@@ -397,10 +412,32 @@
 // target = 9
 // output = [0,1]
 
+  // let result = []
+  // for(let i = 0; i < arr.length; i++){
+  //     for(let j = i; j < arr.length ; j++){
+  //         if((arr[i] + arr[j]) === 9){
+  //             result.push(i,j)
+  //         }
+  //     }
+  // }
+  // console.log(result)
+
+
 //Q.29
 // const arr = [1,2,3,4,5,6,7,8,9,10]
 // target = 15
 // output = [[5,10],[6,9],[7,8]]
+
+  // let result = []
+  // for(let i = 0; i < arr.length; i++){
+  //     for(let j = i; j < arr.length; j++){
+  //         if((arr[i]+arr[j]) === 15){
+  //             result.push([arr[i],arr[j]])
+  //         }
+  //     }
+  // }
+  // console.log(result)
+
 
 //Q.30
 // const arr = [1,2,3,4,5,6,7,8,9,10]
@@ -413,14 +450,10 @@
 // output = []
 
 //Q.32
-// const arr = [1,2,3,4,5,6,7,8,9,10]
-// target = 18
-// output = [[9,9],[8,10]]
+
 
 //Q.33
-// const arr = [1,2,3,4,5,6,7,8,9,10]
-// target = 5
-// output = [[1,4],[2,3]]
+
 
 //Q.34
 // const arr = [1,2,3,4,5,6,7,8,9,10]
@@ -432,6 +465,15 @@
 
 //Q.36 find remove duplicate in array
 // const arrNum = [2,5,6,1,6,4,8,4]
+
+  // let arr = []
+  // for(let i = 0; i < arrNum.length ; i++){
+  //     if(!arr.includes(arrNum[i])){
+  //         arr.push(arrNum[i])
+  //     }
+  // }
+  // console.log(arr)
+
 
 //Q.38 find duplicate in array
 // const arrNum = [2,5,6,1,6,4,8,4]
@@ -449,7 +491,7 @@
 
 //Q.39 "Hello World" to print dlroW olleH
 // const str = "Hello World"
-// console.log(str.split('').reverse().join(' '))
+// console.log(str.split('').reverse().join(''))
 // for(let i = str.length -1; i >= 0; i--){
 //     console.log(str[i])
 // }
@@ -497,3 +539,342 @@
 // const res =customNumberSort(arrNum)
 // console.log(res[arrLength - 2])
 
+//Q.42
+    // async function test() {
+    //     console.log(1);
+
+    //     await Promise.resolve();
+
+    //     console.log(2);
+    // }
+
+    // console.log(3);
+
+    // test();
+
+    // console.log(4);
+
+//Q.43
+  // async function test() {
+  //     console.log("A");
+
+  //     await Promise.resolve();
+
+  //     console.log("B");
+  // }
+
+  // console.log("C");
+
+  // test();
+
+  // Promise.resolve().then(() => {
+  //     console.log("D");
+  // });
+
+  // console.log("E");
+
+//Q.44
+  // async function test() {
+  //     console.log("1");
+
+  //     await test2();
+
+  //     console.log("2");
+  // }
+
+  // async function test2() {
+  //     console.log("3");
+  // }
+
+  // console.log("4");
+
+  // test();
+
+  // console.log("5");
+
+//Q.45
+    // console.log("A");
+
+    // setTimeout(() => {
+    //     console.log("B");
+    // }, 0);
+
+    // (async () => {
+    //     console.log("C");
+
+    //     await Promise.resolve();
+
+    //     console.log("D");
+    // })();
+
+    // process.nextTick(() => {
+    //     console.log("E");
+    // });
+
+    // Promise.resolve().then(() => {
+    //     console.log("F");
+    // });
+
+    // console.log("G");
+//Q.46
+    // async function test() {
+    //     console.log(1);
+
+    //     await Promise.resolve();
+
+    //     console.log(2);
+    // }
+
+    // setTimeout(() => {
+    //     console.log(3);
+    // }, 0);
+
+    // test();
+
+    // console.log(4);
+//Q.47
+    // console.log("start");
+
+    // setTimeout(() => {
+    //     console.log("timeout");
+    // }, 0);
+
+    // (async () => {
+    //     console.log("async start");
+
+    //     await Promise.resolve();
+
+    //     console.log("async end");
+    // })();
+
+    // Promise.resolve().then(() => {
+    //     console.log("promise");
+    // });
+
+    // console.log("end");
+//Q.48
+  // console.log(1);
+
+  // async function test() {
+  //     console.log(2);
+
+  //     await Promise.resolve();
+
+  //     console.log(3);
+  // }
+
+  // test();
+
+  // Promise.resolve().then(() => {
+  //     console.log(4);
+  // });
+
+  // console.log(5);
+//Q.49
+  // async function test() {
+  //     console.log(1);
+
+  //     await Promise.resolve();
+
+  //     console.log(2);
+
+  //     await Promise.resolve();
+
+  //     console.log(3);
+  // }
+
+  // test();
+
+  // console.log(4);
+//Q.50
+    // async function test() {
+    //     console.log("A");
+
+    //     await Promise.resolve();
+
+    //     console.log("B");
+    // }
+
+    // console.log("C");
+
+    // test();
+
+    // Promise.resolve().then(() => {
+    //     console.log("D");
+    // });
+
+    // console.log("E");
+//Q.51
+    // console.log("1");
+
+    // setTimeout(() => {
+    //   console.log("2");
+    // }, 0);
+
+    // setImmediate(() => {
+    //   console.log("3");
+    // });
+
+    // process.nextTick(() => {
+    //   console.log("4");
+    // });
+
+    // Promise.resolve().then(() => {
+    //   console.log("5");
+    // });
+
+    // console.log("6");
+//Q.52
+    // console.log("1");
+
+    // setTimeout(() => {
+    //   console.log("2");
+
+    //   Promise.resolve().then(() => {
+    //     console.log("3");
+    //   });
+    // }, 0);
+
+    // console.log("4");
+//Q.53
+    setTimeout(() => {
+      console.log("Timeout");
+    }, 0);
+
+    setImmediate(() => {
+      console.log("Immediate");
+    });
+
+    process.nextTick(() => {
+      console.log("NextTick");
+    });
+
+    Promise.resolve().then(() => {
+      console.log("Promise");
+    });
+//Q.54
+    process.nextTick(() => {
+      console.log("A");
+    });
+
+    process.nextTick(() => {
+      console.log("B");
+    });
+
+    Promise.resolve().then(() => {
+      console.log("C");
+    });
+
+    console.log("D");
+//Q.55
+    setTimeout(() => {
+      console.log("timeout");
+    }, 0);
+
+    Promise.resolve().then(() => {
+      console.log("promise");
+
+      process.nextTick(() => {
+        console.log("nextTick");
+      });
+    });
+//Q.56
+    console.log("Start");
+
+    setTimeout(() => {
+      console.log("Timeout");
+    }, 0);
+
+    Promise.resolve().then(() => {
+      console.log("Promise");
+    });
+
+    process.nextTick(() => {
+      console.log("NextTick");
+    });
+
+    console.log("End");
+//Q.57
+    console.log("1");
+
+    Promise.resolve().then(() => {
+      console.log("2");
+
+      Promise.resolve().then(() => {
+        console.log("3");
+      });
+    });
+
+    console.log("4");
+//Q.58
+    console.log("A");
+
+    setTimeout(() => {
+      console.log("B");
+    }, 0);
+
+    setImmediate(() => {
+      console.log("C");
+    });
+
+    console.log("D");
+//Q.59 // find the pair that output will be 9 like (1,8),(2,7)
+    const arr = [1,2,3,4,5,6,7,8,9]
+    for(let i = 0; i < arr.length ; i++){
+      for(let j = i ; j < arr.length ; j++){
+        if((arr[i] + arr[j])== 9){
+          console.log(arr[i],arr[j])
+        }
+      }
+    }
+//Q.60 find single value [a,b,c,d] and also like { a: 2, b: 3, c: 2, d: 2 }
+    const str = [a,b,c,a,b,d,c,d,b]
+    let obj = {}
+    for(let i = 0; i < str.length ; i++){
+      obj[str[i]] = (obj[str[i]] || 0) + 1
+    }
+    console.log(obj)
+
+//Q.61 print 1 to 10 without using loop
+//Q.62  find output is 45
+    // const arr1 = [ 1, 2, 3,
+    //               4, 5, 6,
+    //               7, 8, 9]
+//Q.63 find avg of this arr
+    // const arrNum =  [12, 35, 1, 10, 34, 1]
+    // let sum = 0;
+
+    // for (let i = 0; i < arrNum.length; i++) {
+    //   sum += arrNum[i];
+    // }
+    // const average = sum / arrNum.length;
+    // console.log("Sum:", sum);         // 93
+    // console.log("Average:", average); // 15.5
+                
+//Q.64
+    // function a(){
+    //   console.log(1);
+    //   setTimeout(() => {
+    //     console.log(2)
+    //   },0);
+    //   new Promise(resolve => {
+    //       console.log(3);
+    //       resolve(4);
+    //       console.log(5)
+    //     })
+    //   new Promise(resolve =>
+    //     resolve(6))
+    //     .then(console.log)
+    //     console.log(7)
+    // }
+
+//Q.65
+    // for (var x = 0; x <= 5; x++) {
+    //     printVal(x);
+    //   }
+    
+    //   let printVal = (z) => {
+    //     setTimeout(() => {
+    //       console.log(z)
+    //     }, 0)
+    //   }

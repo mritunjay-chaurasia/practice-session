@@ -168,8 +168,7 @@
     app.listen(5000, () => console.log("Server running on 5000"));
 
 
-21-How do you handle errors in asynchronous code?
-with promises we can use .catch() method and in modern code async/await with try catch are used 
+21-
 
 22-What is the difference between process.nextTick() and setImmediate()? 
     Both process.nextTick() and setImmediate() schedule callbacks, but they run at different points in the Node.js event loop. process.nextTick() runs immediately after the current operation, before the event loop continues, while setImmediate() runs on the next iteration, after I/O events. process.nextTick() has higher priority but can cause event loop starvation if overused, while setImmediate() is safer for deferring execution.
@@ -227,7 +226,8 @@ with promises we can use .catch() method and in modern code async/await with try
     we can use promises or async/await to avoid callback hell.
 
 29-What is the difference between synchronous and asynchronous error handling?
-    Synchronous error handling deals with errors in the same call stack and can be caught directly with try/catch. Asynchronous error handling deals with errors that occur later (e.g., in callbacks, Promises, or async functions). For async code, we use callbacks with error parameters, .catch() with Promises, or try/catch with async/await.
+    Synchronous error handling deals with errors in the same call stack and can be caught directly with try/catch. 
+    Asynchronous error handling deals with errors that occur later (e.g., in callbacks, Promises, or async functions). For async code, we use callbacks with error parameters, .catch() with Promises, or try/catch with async/await.
 
 30-How do you secure a Node.js application?
     a- Validate all user inputs (use libraries like Joi or express-validator).
@@ -250,9 +250,7 @@ Load balancing is the process of distributing incoming network traffic (HTTP req
                                         or
 Load Balancing: Load balancing is a proccess of distributing incoming traffic across multiple severs for improve performance and scalability
 
-32- callback hell?
-Callback hell is an issue caused by a nested callback. 
-To overcome this situation, we use promises.
+32- 
 
 
 33- passport module in NodeJS?
@@ -313,4 +311,38 @@ c- Transparent proxy- Used by organizations to monitor or control to internet us
         Limit in-memory caching; use Redis when appropriate.
         Profile memory with heap snapshots.
         Monitor memory usage in production.
+
+42- Node.js Event Loop Phases
+    ┌───────────────────┐
+    │ Timers            │
+    ├───────────────────┤
+    │ Pending Callbacks │
+    ├───────────────────┤
+    │ Idle / Prepare    │
+    ├───────────────────┤
+    │ Poll              │
+    ├───────────────────┤
+    │ Check             │
+    ├───────────────────┤
+    │ Close Callbacks   │
+    └───────────────────┘
+    Node.js Event Loop has six phases: Timers, Pending Callbacks, Idle/Prepare, Poll, Check, and Close Callbacks. Timers executes setTimeout/setInterval callbacks, Poll handles I/O events, Check executes setImmediate callbacks, and Close Callbacks handles resource cleanup events. Between phases, Node.js also processes microtasks, where process.nextTick() has the highest priority followed by Promise callbacks and async/await continuations. This architecture allows Node.js to handle many concurrent I/O operations efficiently using a single thread.
+
+    Current Call Stack
+    ↓
+    process.nextTick()
+    ↓
+    Promise.then / await
+    ↓
+    Timers (setTimeout/setInterval)
+    ↓
+    Pending Callbacks
+    ↓
+    Idle/Prepare
+    ↓
+    Poll (I/O)
+    ↓
+    Check (setImmediate)
+    ↓
+    Close Callbacks
 

@@ -575,5 +575,38 @@ db.users.find({
   status: "active"
 })
 
-What is ACID ?
+21- What is ACID ?
   ACID stands for Atomicity, Consistency, Isolation, and Durability. These properties ensure that database transactions are processed reliably and maintain data integrity. Relational databases like PostgreSQL support ACID by default, and MongoDB also supports ACID transactions, including multi-document transactions from version 4.0 onward.
+
+  Pagination
+  page = 2 , limit =10
+  
+  const users = await User.find()
+    .sort({ createdAt: -1 })
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+22- To optimize MongoDB queries, I use several techniques:
+  a- Indexing
+    Create indexes on frequently searched, filtered, sorted, and joined fields.
+    This avoids full collection scans and significantly reduces query execution time.
+  b- Projection
+    Fetch only the required fields instead of the entire document.
+    This reduces network payload and memory usage.
+    User.find({}, { name: 1, email: 1 })
+  c- Pagination
+    Avoid loading thousands of records at once.
+    Use pagination (limit, skip) or cursor-based pagination for large datasets.
+    User.find().limit(10).skip(20)
+  d- Using lean()
+    In Mongoose, lean() returns plain JavaScript objects instead of Mongoose documents.
+    This reduces memory consumption and improves read performance.
+    User.find().lean()
+  e- Aggregation Pipeline Optimization
+    Apply $match as early as possible to filter data.
+    Use $project to return only required fields.
+    Avoid unnecessary pipeline stages.
+  f- Avoid N+1 Queries
+    Use aggregation $lookup or proper population strategies instead of running queries inside loops.
+  g- Query Analysis
+    Use .explain("executionStats") to identify collection scans and slow queries.

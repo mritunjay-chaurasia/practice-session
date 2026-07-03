@@ -96,6 +96,13 @@ A higher order function is any function that takes one or more functions as an a
 11- callback functions: callback function is a function passed another function as an arguments. They are used to perfom asynchronous operations like handling events, making api calls, or reading files etc.
 
 12- Recursion : Recursion is a programing technique to call itself to solved problem.
+    want to print 1 to 10 number without using for loop
+    function printNumber(number){
+        if(number > 10) return
+        console.log(number)
+           printNumber(number+1)
+    }
+    printNumber(1)
 
 13- shallow copy and deep copy : A shallow copy duplicates the top-level properties of an object, but  A deep copy duplicates all levels of an object
 
@@ -125,10 +132,13 @@ directly does not copy the variable value , it is copy the reference of variable
 
 function outer(){
     let count = 0
-    function inner(){
+    return function inner(){
         count ++
+        console.log(count)
     }
 }
+const counter = outer
+counter() => 1
 
 or
 inside below i have used closure concept for print 1-10 number otherwise it print 11 number 10 times so in case var keyword need to use closure method otherwise in case of let keyword no need to closure  
@@ -166,8 +176,31 @@ TypeScript: types are checked at compile time
             Superset of JavaScrip
 
 22- 
-Event Bubbling: event starts from child to parent (innert to outer)
-Event Capturing: event start from  parent to child (outer to inner)
+    Event Bubbling: event occurs at child element and event propagates from child to parent (innert to outer)
+      <div onClick={() => {console.log("parent elements")}}>
+        <button type='button' onClick={(e) =>{e.stopPropagation();console.log("child elements")}}>Click</button>
+      </div>
+
+    Event Capturing: event start from  parent to child (outer to inner)
+        <div onClickCapture={() => {console.log("parent elements")}}>
+            <button type='button' onClickCapture={(e) =>{console.log("child elements")}}>Click</button>
+        </div>
+    Event Delegation: Only one handler on <ul>.
+        function App() {
+            const handleClick = (e) => {
+                if (e.target.tagName === "LI") {
+                console.log(e.target.textContent);
+                }
+            };
+
+            return (
+                <ul onClick={handleClick}>
+                <li>React</li>
+                <li>Node</li>
+                <li>MongoDB</li>
+                </ul>
+            );
+        }
 
 23- map and forEach => map function returns an array while forEach return undefined
 
@@ -187,7 +220,22 @@ Promise.resolve() resolves immediately
 Microtasks have higher priority than macrotasks
 
 
+26- JSON.stringify()
+    Converts a JavaScript object into a JSON string.
+    const obj = {
+        name: "Mritunjay",
+        age: 25
+    };
+    const jsonString = JSON.stringify(obj);
+    Output: {"name":"Mritunjay","age":25}
+27- JSON.parse()
+    Converts a JSON string into a JavaScript object.
+    const jsonString = '{"name":"Mritunjay","age":25}';
 
+    const obj = JSON.parse(jsonString);
+
+    console.log(obj);
+    { name: 'Mritunjay', age: 25 }
 
 
 
